@@ -3,5 +3,7 @@
     "tabWidth": 4,
     "semi": false,
     "singleQuote": true,
-    "trailingComma": "none"
+    "trailingComma": "none",
+    "noUnusedVariables": true,
+    "noUnusedParams": true
   }

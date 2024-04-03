@@ -1,8 +1,7 @@
 +|lineitem.tbl|1|1|1|1|17|15317.00|0.04|0.02|N|O|1996-03-13|1996-02-12|1996-03-22|DELIVER IN PERSON|TRUCK|egular courts above the|
 +|lineitem.tbl|1|1|1|2|36|32436.00|0.09|0.06|N|O|1996-04-12|1996-02-28|1996-04-20|TAKE BACK RETURN|MAIL|ly final dependencies: slyly bold |
 +|lineitem.tbl|1|1|1|3|8|7208.00|0.10|0.02|N|O|1996-01-29|1996-03-05|1996-01-31|TAKE BACK RETURN|REG AIR|riously. regular. express dep|
-+|supplier.tbl|1|Supplier#000000001| N kD4on9OM Ipw3.gf0JBoQDd7tgrzrddZ|17|27-918-335-1736|5755.94|each slyly above the careful|
-+|customer.tbl|1|Customer#000000001|IVhzIApeRb ot.c.E|15|25-989-741-2988|711.56|BUILDING|to the even. regular platelets. regular. ironic epitaphs nag e|
++|orders.tbl|1|1|O|124828.11|1996-01-02|5-LOW|Clerk#000000951|0|nstructions sleep furiously among |
 +|nation.tbl|0|ALGERIA|0| haggle. carefully final deposits detect slyly agai|
 +|nation.tbl|1|ARGENTINA|1|al foxes promise slyly according to the regular accounts. bold requests alon|
 +|nation.tbl|2|BRAZIL|1|y alongside of the pending deposits. carefully special packages are about the ironic forges. slyly special |
@@ -15,23 +14,41 @@
 +|nation.tbl|9|INDONESIA|2| slyly express asymptotes. regular deposits haggle slyly. carefully ironic hockey players sleep blithely. carefull|
 +|nation.tbl|10|IRAN|4|efully alongside of the slyly final dependencies. |
 +|nation.tbl|11|IRAQ|4|nic deposits boost atop the quickly final requests? quickly regula|
-+|nation.tbl|12|JAPAN|2|ously. final. express gifts cajole a|
-+|nation.tbl|13|JORDAN|4|ic deposits are blithely about the carefully regular pa|
-+|nation.tbl|14|KENYA|0| pending excuses haggle furiously deposits. pending. express pinto beans wake fluffily past t|
-+|nation.tbl|15|MOROCCO|0|rns. blithely bold courts among the closely regular packages use furiously bold platelets?|
-+|nation.tbl|16|MOZAMBIQUE|0|s. ironic. unusual asymptotes wake blithely r|
-+|nation.tbl|17|PERU|1|platelets. blithely pending dependencies use fluffily across the even pinto beans. carefully silent accoun|
-+|nation.tbl|18|CHINA|2|c dependencies. furiously express notornis sleep slyly regular accounts. ideas sleep. depos|
-+|nation.tbl|19|ROMANIA|3|ular asymptotes are about the furious multipliers. express dependencies nag above the ironically ironic account|
-+|nation.tbl|20|SAUDI ARABIA|4|ts. silent requests haggle. closely express packages sleep across the blithely|
-+|nation.tbl|21|VIETNAM|2|hely enticingly express accounts. even. final |
-+|nation.tbl|22|RUSSIA|3| requests against the platelets use never according to the quickly regular pint|
-+|nation.tbl|23|UNITED KINGDOM|3|eans boost carefully special requests. accounts are. carefull|
++|region.tbl|0|AFRICA|lar deposits. blithely final packages cajole. regular waters are final requests. regular accounts are according to |
++|region.tbl|1|AMERICA|hs use ironic. even requests. s|
++|region.tbl|2|ASIA|ges. thinly even pinto beans ca|
++|region.tbl|3|EUROPE|ly final courts cajole furiously final excuse|
++|region.tbl|4|MIDDLE EAST|uickly special accounts cajole carefully blithely close requests. carefully final asymptotes haggle furiousl|
+-|nation.tbl|10|IRAN|4|efully alongside of the slyly final dependencies. |
 +|nation.tbl|24|UNITED STATES|1|y final packages. slow foxes cajole quickly. quickly silent platelets breach ironic accounts. unusual pinto be|
--|lineitem.tbl|1|1|1|2|36|32436.00|0.09|0.06|N|O|1996-04-12|1996-02-28|1996-04-20|TAKE BACK RETURN|MAIL|ly final dependencies: slyly bold |
+-|nation.tbl|3|CANADA|1|eas hang ironic. silent packages. slyly regular packages are furiously over the tithes. fluffily bold|
++|nation.tbl|23|UNITED KINGDOM|3|eans boost carefully special requests. accounts are. carefull|
+-|nation.tbl|9|INDONESIA|2| slyly express asymptotes. regular deposits haggle slyly. carefully ironic hockey players sleep blithely. carefull|
++|nation.tbl|22|RUSSIA|3| requests against the platelets use never according to the quickly regular pint|
+-|nation.tbl|11|IRAQ|4|nic deposits boost atop the quickly final requests? quickly regula|
++|nation.tbl|21|VIETNAM|2|hely enticingly express accounts. even. final |
+-|lineitem.tbl|1|1|1|1|17|15317.00|0.04|0.02|N|O|1996-03-13|1996-02-12|1996-03-22|DELIVER IN PERSON|TRUCK|egular courts above the|
 +|lineitem.tbl|1|1|1|6|32|28832.00|0.07|0.02|N|O|1996-01-30|1996-02-07|1996-02-03|DELIVER IN PERSON|MAIL|arefully slyly ex|
+-|nation.tbl|1|ARGENTINA|1|al foxes promise slyly according to the regular accounts. bold requests alon|
++|nation.tbl|20|SAUDI ARABIA|4|ts. silent requests haggle. closely express packages sleep across the blithely|
+-|nation.tbl|5|ETHIOPIA|0|ven packages wake quickly. regu|
++|nation.tbl|19|ROMANIA|3|ular asymptotes are about the furious multipliers. express dependencies nag above the ironically ironic account|
+-|nation.tbl|4|EGYPT|4|y above the carefully unusual theodolites. final dugouts are quickly across the furiously regular d|
++|nation.tbl|18|CHINA|2|c dependencies. furiously express notornis sleep slyly regular accounts. ideas sleep. depos|
+-|nation.tbl|0|ALGERIA|0| haggle. carefully final deposits detect slyly agai|
++|nation.tbl|17|PERU|1|platelets. blithely pending dependencies use fluffily across the even pinto beans. carefully silent accoun|
 -|lineitem.tbl|1|1|1|3|8|7208.00|0.10|0.02|N|O|1996-01-29|1996-03-05|1996-01-31|TAKE BACK RETURN|REG AIR|riously. regular. express dep|
 +|lineitem.tbl|1|1|1|5|24|21624.00|0.10|0.04|N|O|1996-03-30|1996-03-14|1996-04-01|NONE|FOB| pending foxes. slyly re|
--|lineitem.tbl|1|1|1|1|17|15317.00|0.04|0.02|N|O|1996-03-13|1996-02-12|1996-03-22|DELIVER IN PERSON|TRUCK|egular courts above the|
+-|nation.tbl|8|INDIA|2|ss excuses cajole slyly across the packages. deposits print aroun|
++|nation.tbl|16|MOZAMBIQUE|0|s. ironic. unusual asymptotes wake blithely r|
+-|nation.tbl|2|BRAZIL|1|y alongside of the pending deposits. carefully special packages are about the ironic forges. slyly special |
++|nation.tbl|15|MOROCCO|0|rns. blithely bold courts among the closely regular packages use furiously bold platelets?|
+-|nation.tbl|6|FRANCE|3|refully final requests. regular. ironi|
++|nation.tbl|14|KENYA|0| pending excuses haggle furiously deposits. pending. express pinto beans wake fluffily past t|
+-|nation.tbl|7|GERMANY|3|l platelets. regular accounts x-ray: unusual. regular acco|
++|nation.tbl|13|JORDAN|4|ic deposits are blithely about the carefully regular pa|
+-|lineitem.tbl|1|1|1|2|36|32436.00|0.09|0.06|N|O|1996-04-12|1996-02-28|1996-04-20|TAKE BACK RETURN|MAIL|ly final dependencies: slyly bold |
 +|lineitem.tbl|1|1|1|4|28|25228.00|0.09|0.06|N|O|1996-04-21|1996-03-30|1996-05-16|NONE|AIR|lites. fluffily even de|
-+|orders.tbl|1|1|O|124828.11|1996-01-02|5-LOW|Clerk#000000951|0|nstructions sleep furiously among |
++|supplier.tbl|1|Supplier#000000001| N kD4on9OM Ipw3.gf0JBoQDd7tgrzrddZ|17|27-918-335-1736|5755.94|each slyly above the careful|
++|customer.tbl|1|Customer#000000001|IVhzIApeRb ot.c.E|15|25-989-741-2988|711.56|BUILDING|to the even. regular platelets. regular. ironic epitaphs nag e|
++|nation.tbl|12|JAPAN|2|ously. final. express gifts cajole a|

@@ -20,10 +20,8 @@ public class DataOperation {
     }
 
     public String toString() {
-        return "DataOperation{" +
-                "operation='" + operation + '\'' +
-                ", tableName='" + tableName + '\'' +
-                ", dataContent=" + dataContent +
-                '}';
+        return "[ " + operation + "  " + tableName + " ] " +
+                dataContent;
     }
+
 }

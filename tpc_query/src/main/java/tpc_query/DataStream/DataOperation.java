@@ -3,6 +3,7 @@ package tpc_query.DataStream;
 import tpc_query.DataStream.DataContent.IDataContent;
 
 public class DataOperation {
+
     public String operation;
     public String tableName;
     public IDataContent dataContent;
@@ -17,6 +18,18 @@ public class DataOperation {
         this.operation = operation;
         this.tableName = tableName;
         this.dataContent = dataContent;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public IDataContent getDataContent() {
+        return dataContent;
     }
 
     public String toString() {

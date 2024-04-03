@@ -2,9 +2,7 @@
 package tpc_query.DataStream;
 
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
-import tpc_query.DataStream.DataContent.Customer;
-import tpc_query.DataStream.DataContent.IDataContent;
-import tpc_query.DataStream.DataContent.Orders;
+import tpc_query.DataStream.DataContent.*;
 
 import java.io.File;
 import java.util.Arrays;
@@ -22,20 +20,28 @@ public class TPCSource implements SourceFunction<DataOperation> {
             String[] line = sc.nextLine().split("\\|");
             String operation = line[0];
             String tableName = line[1];
-
+            IDataContent dataContent = null;
             if (tableName.equals("customer.tbl")) {
-                IDataContent dataContent = new Customer(Arrays.copyOfRange(line, HOLD_SIZE, line.length));
-                sourceData.collect(new DataOperation(operation, tableName, dataContent));
-            } else if (tableName.equals("orders.tbl")) {
-                IDataContent dataContent = new Orders(Arrays.copyOfRange(line, HOLD_SIZE, line.length));
-                sourceData.collect(new DataOperation(operation, tableName, dataContent));
-            } else if (tableName.equals("lineitem.tbl")) {
-            } else if (tableName.equals("supplier.tbl")) {
-            } else if (tableName.equals("nation.tbl")) {
-            } else if (tableName.equals("region.tbl")) {
-            }
+                dataContent = new Customer(Arrays.copyOfRange(line, HOLD_SIZE, line.length));
 
-            sourceData.collect(new DataOperation(operation, tableName));
+            } else if (tableName.equals("orders.tbl")) {
+                dataContent = new Orders(Arrays.copyOfRange(line, HOLD_SIZE, line.length));
+
+            } else if (tableName.equals("lineitem.tbl")) {
+                dataContent = new LineItem(Arrays.copyOfRange(line, HOLD_SIZE, line.length));
+
+            } else if (tableName.equals("supplier.tbl")) {
+                dataContent = new Supplier(Arrays.copyOfRange(line, HOLD_SIZE, line.length));
+
+            } else if (tableName.equals("nation.tbl")) {
+                dataContent = new Nation(Arrays.copyOfRange(line, HOLD_SIZE, line.length));
+
+            } else if (tableName.equals("region.tbl")) {
+                dataContent = new Region(Arrays.copyOfRange(line, HOLD_SIZE, line.length));
+
+            }
+            sourceData.collect(new DataOperation(operation, tableName, dataContent));
+
             if (!sc.hasNext()) {
                 System.out.println("All data has been recieved.");
                 running = false;

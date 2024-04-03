@@ -26,7 +26,41 @@ public class Orders implements IDataContent {
         this.O_COMMENT = string[8];
     }
 
-    // getters and setters...
+    public int getO_ORDERKEY() {
+        return O_ORDERKEY;
+    }
+
+    public int getO_CUSTKEY() {
+        return O_CUSTKEY;
+    }
+
+    public char getO_ORDERSTATUS() {
+        return O_ORDERSTATUS;
+    }
+
+    public double getO_TOTALPRICE() {
+        return O_TOTALPRICE;
+    }
+
+    public String getO_ORDERDATE() {
+        return O_ORDERDATE;
+    }
+
+    public String getO_ORDERPRIORITY() {
+        return O_ORDERPRIORITY;
+    }
+
+    public String getO_CLERK() {
+        return O_CLERK;
+    }
+
+    public int getO_SHIPPRIORITY() {
+        return O_SHIPPRIORITY;
+    }
+
+    public String getO_COMMENT() {
+        return O_COMMENT;
+    }
 
     public String toString() {
         return "Orders [O_ORDERKEY=" + O_ORDERKEY + ", O_CUSTKEY=" + O_CUSTKEY + ", O_ORDERSTATUS=" + O_ORDERSTATUS

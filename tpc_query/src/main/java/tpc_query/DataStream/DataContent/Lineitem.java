@@ -1,5 +1,8 @@
 package tpc_query.DataStream.DataContent;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class LineItem implements IDataContent {
     private int L_ORDERKEY;
     private int L_PARTKEY;
@@ -40,7 +43,13 @@ public class LineItem implements IDataContent {
         this.L_COMMENT = string[15];
     }
 
-    // getters and setters...
+    public List<String> toList() {
+        return Arrays.asList(String.valueOf(L_ORDERKEY), String.valueOf(L_PARTKEY), String.valueOf(L_SUPPKEY),
+                String.valueOf(L_LINENUMBER), String.valueOf(L_QUANTITY), String.valueOf(L_EXTENDEDPRICE),
+                String.valueOf(L_DISCOUNT), String.valueOf(L_TAX), String.valueOf(L_RETURNFLAG),
+                String.valueOf(L_LINESTATUS), L_SHIPDATE, L_COMMITDATE, L_RECEIPTDATE, L_SHIPINSTRUCT, L_SHIPMODE,
+                L_COMMENT);
+    }
 
     public String toString() {
         return "Lineitem [L_ORDERKEY=" + L_ORDERKEY + ", L_PARTKEY=" + L_PARTKEY + ", L_SUPPKEY=" + L_SUPPKEY

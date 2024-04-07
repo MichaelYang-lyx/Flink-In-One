@@ -1,5 +1,8 @@
 package tpc_query.DataStream.DataContent;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Orders implements IDataContent {
     private int O_ORDERKEY;
     private int O_CUSTKEY;
@@ -60,6 +63,12 @@ public class Orders implements IDataContent {
 
     public String getO_COMMENT() {
         return O_COMMENT;
+    }
+
+    public List<String> toList() {
+        return Arrays.asList(String.valueOf(O_ORDERKEY), String.valueOf(O_CUSTKEY), String.valueOf(O_ORDERSTATUS),
+                String.valueOf(O_TOTALPRICE), O_ORDERDATE, O_ORDERPRIORITY, O_CLERK, String.valueOf(O_SHIPPRIORITY),
+                O_COMMENT);
     }
 
     public String toString() {

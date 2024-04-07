@@ -1,5 +1,8 @@
 package tpc_query.DataStream.DataContent;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Customer implements IDataContent {
     private int C_CUSTKEY;
     private String C_NAME;
@@ -54,6 +57,11 @@ public class Customer implements IDataContent {
 
     public String getC_COMMENT() {
         return C_COMMENT;
+    }
+
+    public List<String> toList() {
+        return Arrays.asList(String.valueOf(C_CUSTKEY), C_NAME, C_ADDRESS, String.valueOf(C_NATIONKEY), C_PHONE,
+                String.valueOf(C_ACCTBAL), C_MKTSEGMENT, C_COMMENT);
     }
 
     public String toString() {

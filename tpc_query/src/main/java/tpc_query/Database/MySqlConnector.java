@@ -10,18 +10,17 @@ public class MySqlConnector {
     public MySqlConnector() {
     }
 
-    static String URL = "jdbc:mysql://localhost:3306/tpc_h";
-    static String USER = "root";
-    static String PASSWORD = "";
+    public static String MYSQL_URL = "jdbc:mysql://localhost:3306/tpc_h";
+    public static String MYSQL_USER = "root";
+    public static String MYSQL_PASSWORD = "";
 
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-
-        createTableTest();
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {//
+        // createTableTest();
         clearTPCHData();
-        createTPCHTable();
+        // createTPCHTable();
 
         Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        Connection connection = DriverManager.getConnection(MYSQL_URL, MYSQL_USER, MYSQL_PASSWORD);
         String sql = "insert into stu(id,name,age) values(?,?,?)";
         // 4.获取预处理对象，并依次给参数赋值
         PreparedStatement statement = connection.prepareCall(sql);
@@ -39,7 +38,7 @@ public class MySqlConnector {
     public static void createTableTest() throws ClassNotFoundException, SQLException {
 
         Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        Connection connection = DriverManager.getConnection(MYSQL_URL, MYSQL_USER, MYSQL_PASSWORD);
         String sql = "CREATE TABLE IF NOT EXISTS stu (id INT, name VARCHAR(255), age INT)";
         PreparedStatement statement = connection.prepareCall(sql);
         int i = statement.executeUpdate();
@@ -50,10 +49,11 @@ public class MySqlConnector {
 
     public static void clearTPCHData() {
 
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(MYSQL_URL, MYSQL_USER, MYSQL_PASSWORD)) {
             Statement stmt = conn.createStatement();
 
-            String[] tableNames = { "REGION", "NATION", "PART", "SUPPLIER", "PARTSUPP", "CUSTOMER", "ORDERS" };
+            String[] tableNames = { "LINEITEM", "REGION", "NATION", "PART", "SUPPLIER", "PARTSUPP", "CUSTOMER",
+                    "ORDERS" };
 
             for (String tableName : tableNames) {
                 stmt.executeUpdate("DELETE FROM " + tableName);
@@ -68,7 +68,114 @@ public class MySqlConnector {
 
     public static void createTPCHTable() throws ClassNotFoundException, SQLException {
 
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(MYSQL_URL, MYSQL_USER, MYSQL_PASSWORD)) {
+            Statement stmt = conn.createStatement();
+
+            stmt.executeUpdate(
+                    "CREATE TABLE IF NOT EXISTS REGION (" +
+                            "R_REGIONKEY INT PRIMARY KEY," +
+                            "R_NAME VARCHAR(25)," +
+                            "R_COMMENT VARCHAR(152)" +
+                            ");");
+
+            stmt.executeUpdate(
+                    "CREATE TABLE IF NOT EXISTS NATION (" +
+                            "N_NATIONKEY INT PRIMARY KEY," +
+                            "N_NAME VARCHAR(25)," +
+                            "N_REGIONKEY INT," +
+                            "N_COMMENT VARCHAR(152)" +
+                            ");");
+
+            stmt.executeUpdate(
+                    "CREATE TABLE IF NOT EXISTS PART (" +
+                            "P_PARTKEY INT PRIMARY KEY," +
+                            "P_NAME VARCHAR(55)," +
+                            "P_MFGR CHAR(25)," +
+                            "P_BRAND CHAR(10)," +
+                            "P_TYPE VARCHAR(25)," +
+                            "P_SIZE INT," +
+                            "P_CONTAINER CHAR(10)," +
+                            "P_RETAILPRICE DECIMAL(15,2)," +
+                            "P_COMMENT VARCHAR(23)" +
+                            ");");
+
+            stmt.executeUpdate(
+                    "CREATE TABLE IF NOT EXISTS SUPPLIER (" +
+                            "S_SUPPKEY INT PRIMARY KEY," +
+                            "S_NAME CHAR(25)," +
+                            "S_ADDRESS VARCHAR(40)," +
+                            "S_NATIONKEY INT," +
+                            "S_PHONE CHAR(15)," +
+                            "S_ACCTBAL DECIMAL(15,2)," +
+                            "S_COMMENT VARCHAR(101)" +
+                            ");");
+
+            stmt.executeUpdate(
+                    "CREATE TABLE IF NOT EXISTS PARTSUPP (" +
+                            "PS_PARTKEY INT," +
+                            "PS_SUPPKEY INT," +
+                            "PS_AVAILQTY INT," +
+                            "PS_SUPPLYCOST DECIMAL(15,2)," +
+                            "PS_COMMENT VARCHAR(199)," +
+                            "PRIMARY KEY (PS_PARTKEY, PS_SUPPKEY)" +
+                            ");");
+
+            stmt.executeUpdate(
+                    "CREATE TABLE IF NOT EXISTS CUSTOMER (" +
+                            "C_CUSTKEY INT PRIMARY KEY," +
+                            "C_NAME VARCHAR(25)," +
+                            "C_ADDRESS VARCHAR(40)," +
+                            "C_NATIONKEY INT," +
+                            "C_PHONE CHAR(15)," +
+                            "C_ACCTBAL DECIMAL(15,2)," +
+                            "C_MKTSEGMENT CHAR(10)," +
+                            "C_COMMENT VARCHAR(117)" +
+                            ");");
+
+            stmt.executeUpdate(
+                    "CREATE TABLE IF NOT EXISTS ORDERS (" +
+                            "O_ORDERKEY INT PRIMARY KEY," +
+                            "O_CUSTKEY INT," +
+                            "O_ORDERSTATUS CHAR(1)," +
+                            "O_TOTALPRICE DECIMAL(15,2)," +
+                            "O_ORDERDATE DATE," +
+                            "O_ORDERPRIORITY CHAR(15)," +
+                            "O_CLERK CHAR(15)," +
+                            "O_SHIPPRIORITY INT," +
+                            "O_COMMENT VARCHAR(79)" +
+                            ");");
+
+            stmt.executeUpdate(
+                    "CREATE TABLE IF NOT EXISTS LINEITEM (" +
+                            "L_ORDERKEY INT," +
+                            "L_PARTKEY INT," +
+                            "L_SUPPKEY INT," +
+                            "L_LINENUMBER INT," +
+                            "L_QUANTITY DECIMAL(15,2)," +
+                            "L_EXTENDEDPRICE DECIMAL(15,2)," +
+                            "L_DISCOUNT DECIMAL(15,2)," +
+                            "L_TAX DECIMAL(15,2)," +
+                            "L_RETURNFLAG CHAR(1)," +
+                            "L_LINESTATUS CHAR(1)," +
+                            "L_SHIPDATE DATE," +
+                            "L_COMMITDATE DATE," +
+                            "L_RECEIPTDATE DATE," +
+                            "L_SHIPINSTRUCT CHAR(25)," +
+                            "L_SHIPMODE CHAR(10)," +
+                            "L_COMMENT VARCHAR(44)," +
+                            "PRIMARY KEY (L_ORDERKEY, L_LINENUMBER)" +
+                            ");");
+
+            System.out.println("Tables created successfully.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void createHardTPCHTable() throws ClassNotFoundException, SQLException {
+
+        try (Connection conn = DriverManager.getConnection(MYSQL_URL, MYSQL_USER, MYSQL_PASSWORD)) {
             Statement stmt = conn.createStatement();
 
             stmt.executeUpdate(

@@ -1,5 +1,8 @@
 package tpc_query.DataStream;
 
+import java.util.Arrays;
+import java.util.List;
+
 import tpc_query.DataStream.DataContent.IDataContent;
 
 public class DataOperation {
@@ -30,6 +33,10 @@ public class DataOperation {
 
     public IDataContent getDataContent() {
         return dataContent;
+    }
+
+    public List<String> getContentList() {
+        return dataContent.toList();
     }
 
     public String toString() {

@@ -1,5 +1,8 @@
 package tpc_query.DataStream.DataContent;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Nation implements IDataContent {
     private int N_NATIONKEY;
     private String N_NAME;
@@ -16,7 +19,9 @@ public class Nation implements IDataContent {
         this.N_COMMENT = string[3];
     }
 
-    // getters and setters...
+    public List<String> toList() {
+        return Arrays.asList(String.valueOf(N_NATIONKEY), N_NAME, String.valueOf(N_REGIONKEY), N_COMMENT);
+    }
 
     public String toString() {
         return "Nation [N_NATIONKEY=" + N_NATIONKEY + ", N_NAME=" + N_NAME + ", N_REGIONKEY=" + N_REGIONKEY

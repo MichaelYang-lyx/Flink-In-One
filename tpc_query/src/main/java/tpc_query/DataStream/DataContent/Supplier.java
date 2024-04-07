@@ -1,5 +1,8 @@
 package tpc_query.DataStream.DataContent;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Supplier implements IDataContent {
     private int S_SUPPKEY;
     private String S_NAME;
@@ -22,7 +25,16 @@ public class Supplier implements IDataContent {
         this.S_COMMENT = string[6];
     }
 
-    // getters and setters...
+    public List<String> toList() {
+        return Arrays.asList(
+                String.valueOf(S_SUPPKEY),
+                S_NAME,
+                S_ADDRESS,
+                String.valueOf(S_NATIONKEY),
+                S_PHONE,
+                String.valueOf(S_ACCTBAL),
+                S_COMMENT);
+    }
 
     public String toString() {
         return "Supplier { S_SUPPKEY=" + S_SUPPKEY + ", S_NAME=" + S_NAME + ", S_ADDRESS=" + S_ADDRESS

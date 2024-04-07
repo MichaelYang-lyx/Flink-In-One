@@ -1,5 +1,8 @@
 package tpc_query.DataStream.DataContent;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Region implements IDataContent {
     private int R_REGIONKEY;
     private String R_NAME;
@@ -24,6 +27,10 @@ public class Region implements IDataContent {
 
     public String getR_COMMENT() {
         return R_COMMENT;
+    }
+
+    public List<String> toList() {
+        return Arrays.asList(String.valueOf(R_REGIONKEY), R_NAME, R_COMMENT);
     }
 
     public String toString() {

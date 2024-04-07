@@ -40,6 +40,7 @@ public class TPCSource implements SourceFunction<DataOperation> {
                 dataContent = new Region(Arrays.copyOfRange(line, HOLD_SIZE, line.length));
 
             }
+            tableName = tableName.replace(".tbl", "").toUpperCase();
             sourceData.collect(new DataOperation(operation, tableName, dataContent));
 
             if (!sc.hasNext()) {

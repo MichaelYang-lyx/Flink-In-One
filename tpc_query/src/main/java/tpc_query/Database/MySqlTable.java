@@ -1,6 +1,27 @@
-package tpc_query.Table;
+package tpc_query.Database;
+
+import tpc_query.Database.MySqlConnector;
+import java.util.List;
+
+import org.apache.flink.api.java.tuple.Tuple5;
 
 public class MySqlTable extends Table {
+
+    private MySqlConnector connector;
+
+    public MySqlTable() {
+        this.connector = new MySqlConnector();
+    }
+
+    public MySqlTable(String tableName, Tuple5<Boolean, Boolean, String, Integer, List<String>> info) {
+
+        this.tableName = tableName;
+        this.isRoot = info.f0;
+        this.isLeaf = info.f1;
+        this.parent = info.f2;
+        this.numChild = info.f3;
+        this.childs = info.f4;
+    }
 
     public MySqlTable(String tableName) {
         this.tableName = tableName;
@@ -28,5 +49,4 @@ public class MySqlTable extends Table {
         // Implement MySQL-specific delete logic
     }
 
-  
 }

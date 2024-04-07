@@ -1,4 +1,4 @@
-package tpc_query.Table;
+package tpc_query.Database;
 
 public interface ITable {
     void insertRow(String data);

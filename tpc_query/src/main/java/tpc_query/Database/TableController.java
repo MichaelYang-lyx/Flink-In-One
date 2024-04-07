@@ -1,4 +1,4 @@
-package tpc_query.Table;
+package tpc_query.Database;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,21 +9,38 @@ import org.apache.flink.api.java.tuple.Tuple5;
 
 public class TableController {
 
-    Map<String, Tuple5<Boolean, Boolean, String, Integer, List<String>>> tableMap;
+    Map<String, Tuple5<Boolean, Boolean, String, Integer, List<String>>> tableInfo;
+    Map<String, ITable> Tables; // just for memory
+    String type;
 
     public TableController() {
-        this.tableMap = new HashMap<>();
+        this.tableInfo = new HashMap<>();
+        this.type = "memory";
+    }
+
+    public TableController(String type) {
+        this.tableInfo = new HashMap<>();
+        this.type = type;
     }
 
     public void setupTables(IQuery query) {
-        query.tableInitialization(this.tableMap);
+        query.registerTables(this.tableInfo);
+        if (this.type.equals("memory")) {
+            this.Tables = new HashMap<>();
+            for (Map.Entry<String, Tuple5<Boolean, Boolean, String, Integer, List<String>>> entry : tableInfo
+                    .entrySet()) {
+                String tableName = entry.getKey();
+                ITable table = new MemoryTable(tableName, entry.getValue());
+                this.Tables.put(tableName, table);
+            }
+        }
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("TableController {\n");
-        for (Map.Entry<String, Tuple5<Boolean, Boolean, String, Integer, List<String>>> entry : tableMap.entrySet()) {
+        for (Map.Entry<String, Tuple5<Boolean, Boolean, String, Integer, List<String>>> entry : tableInfo.entrySet()) {
             String tableName = entry.getKey();
             Tuple5<Boolean, Boolean, String, Integer, List<String>> tableInfo = entry.getValue();
             sb.append("  Table: ").append(tableName);
@@ -35,7 +52,7 @@ public class TableController {
             sb.append("\n\n");
         }
         sb.append("}");
-        return sb.toString();
+        return sb.toString() + this.Tables.toString();
     }
 
     public static void main(String[] args) {

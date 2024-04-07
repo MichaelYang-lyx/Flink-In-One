@@ -28,6 +28,4 @@ public class Main {
         env.execute("TPC-H Query");
     }
 
-
-    
 }

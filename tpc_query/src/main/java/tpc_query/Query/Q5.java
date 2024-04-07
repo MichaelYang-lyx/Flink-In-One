@@ -28,16 +28,16 @@ public class Q5 implements IQuery, Serializable {
 
     private void addTable(Map<String, Tuple5<Boolean, Boolean, String, Integer, List<String>>> tableMap,
             String tableName, Boolean isRoot, Boolean isLeaf, String parent, int numChild,
-            List<String> childs, Object newParam) {
+            List<String> childs) {
         tableMap.put(tableName, new Tuple5<>(isRoot, isLeaf, parent, numChild, childs));
     }
 
-    public void tableInitialization(Map<String, Tuple5<Boolean, Boolean, String, Integer, List<String>>> tableMap) {
-        addTable(tableMap, "LineItme", true, false, null, 2, Arrays.asList("Orders", "Supplier"), null);
-        addTable(tableMap, "Orders", false, false, "LineItme", 1, Arrays.asList("Customer"), null);
-        addTable(tableMap, "Customer", false, false, "Orders", 1, Arrays.asList("Nation2"), null);
-        addTable(tableMap, "Supplier", false, false, "Lineitem", 1, Arrays.asList("Nation1"), null);
-        addTable(tableMap, "Nation1", false, true, "Supplier", 0, new ArrayList<>(), null);
+    public void registerTables(Map<String, Tuple5<Boolean, Boolean, String, Integer, List<String>>> tableMap) {
+        addTable(tableMap, "LineItme", true, false, null, 2, Arrays.asList("Orders", "Supplier"));
+        addTable(tableMap, "Orders", false, false, "LineItme", 1, Arrays.asList("Customer"));
+        addTable(tableMap, "Customer", false, false, "Orders", 1, Arrays.asList("Nation2"));
+        addTable(tableMap, "Supplier", false, false, "Lineitem", 1, Arrays.asList("Nation1"));
+        addTable(tableMap, "Nation1", false, true, "Supplier", 0, new ArrayList<>());
     }
 
 }

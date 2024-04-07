@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import tpc_query.Query.IQuery;
+import tpc_query.Query.Q5;
 import org.apache.flink.api.java.tuple.Tuple5;
 
 public class TableController {
@@ -16,17 +17,8 @@ public class TableController {
         this.tableMap = new HashMap<>();
     }
 
-    private void initializeTable(String tableName, Boolean isRoot, Boolean isLeaf, String parent, int numChild,
-            List<String> childs) {
-        this.tableMap.put(tableName, new Tuple5<>(isRoot, isLeaf, parent, numChild, childs));
-    }
-
-    public void setupTables() {
-        initializeTable("LineItme", true, false, null, 2, Arrays.asList("Orders", "Supplier"));
-        initializeTable("Orders", false, false, "LineItme", 1, Arrays.asList("Customer"));
-        initializeTable("Customer", false, false, "Orders", 1, Arrays.asList("Nation2"));
-        initializeTable("Supplier", false, false, "Lineitem", 1, Arrays.asList("Nation1"));
-        initializeTable("Nation1", false, true, "Supplier", 0, new ArrayList<>());
+    public void setupTables(IQuery query) {
+        query.tableInitialization(this.tableMap);
     }
 
     @Override
@@ -50,7 +42,8 @@ public class TableController {
 
     public static void main(String[] args) {
         TableController controller = new TableController();
-        controller.setupTables();
+        IQuery query = new Q5();
+        controller.setupTables(query);
         System.out.println(controller);
     }
 }

@@ -1,8 +1,5 @@
 package tpc_query.DataStream.DataContent;
 
-import java.util.HashMap;
-import java.util.Arrays;
-
 public class Customer implements IDataContent {
     private int C_CUSTKEY;
     private String C_NAME;

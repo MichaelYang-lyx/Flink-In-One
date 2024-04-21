@@ -1,19 +1,19 @@
 package tpc_query.Database;
 
-import tpc_query.Database.MySqlConnector;
+import tpc_query.Database.MySQLConnector;
 import java.util.List;
 
 import org.apache.flink.api.java.tuple.Tuple5;
 
-public class MySqlTable extends Table {
+public class MySQLTable extends Table {
 
-    private MySqlConnector connector;
+    private MySQLConnector connector;
 
-    public MySqlTable() {
-        this.connector = new MySqlConnector();
+    public MySQLTable() {
+        this.connector = new MySQLConnector();
     }
 
-    public MySqlTable(String tableName, Tuple5<Boolean, Boolean, String, Integer, List<String>> info) {
+    public MySQLTable(String tableName, Tuple5<Boolean, Boolean, List<String>, Integer, List<String>> info) {
 
         this.tableName = tableName;
         this.isRoot = info.f0;
@@ -23,7 +23,7 @@ public class MySqlTable extends Table {
         this.childs = info.f4;
     }
 
-    public MySqlTable(String tableName) {
+    public MySQLTable(String tableName) {
         this.tableName = tableName;
         // Initialize database connection and other setup
     }

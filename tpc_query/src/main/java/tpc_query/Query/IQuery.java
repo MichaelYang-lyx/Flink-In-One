@@ -12,5 +12,5 @@ public interface IQuery {
         return true;
     }
 
-    public void registerTables(Map<String, Tuple5<Boolean, Boolean, String, Integer, List<String>>> tableMap);
+    public void registerTables(Map<String, Tuple5<Boolean, Boolean, List<String>, Integer, List<String>>> tableMap);
 }

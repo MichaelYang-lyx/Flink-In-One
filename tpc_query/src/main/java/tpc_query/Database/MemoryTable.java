@@ -13,7 +13,7 @@ public class MemoryTable extends Table {
         dataMap = new HashMap<>();
     }
 
-    public MemoryTable(String tableName, Tuple5<Boolean, Boolean, String, Integer, List<String>> info) {
+    public MemoryTable(String tableName, Tuple5<Boolean, Boolean, List<String>, Integer, List<String>> info) {
         dataMap = new HashMap<>();
         this.tableName = tableName;
         this.isRoot = info.f0;

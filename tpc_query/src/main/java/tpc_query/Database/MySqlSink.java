@@ -11,7 +11,7 @@ import java.util.List;
 
 import tpc_query.DataStream.DataOperation;
 
-public class MySqlSink extends RichSinkFunction<DataOperation> {
+public class MySQLSink extends RichSinkFunction<DataOperation> {
     private Connection connection;
     private PreparedStatement preparedStatement;
 
@@ -19,8 +19,8 @@ public class MySqlSink extends RichSinkFunction<DataOperation> {
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connection = DriverManager.getConnection(MySqlConnector.MYSQL_URL, MySqlConnector.MYSQL_USER,
-                MySqlConnector.MYSQL_PASSWORD);
+        connection = DriverManager.getConnection(MySQLConnector.MYSQL_URL, MySQLConnector.MYSQL_USER,
+                MySQLConnector.MYSQL_PASSWORD);
 
     }
 
@@ -41,7 +41,6 @@ public class MySqlSink extends RichSinkFunction<DataOperation> {
         List<String> content = operation.getContentList();
 
         String placeholders = String.join(", ", Collections.nCopies(content.size(), "?"));
-        System.out.println(operation.getOperation());
         if (operation.getOperation().equals("+")) {
             return String.format("INSERT INTO %s VALUES (%s);", tableName, placeholders);
         } else {
@@ -53,12 +52,15 @@ public class MySqlSink extends RichSinkFunction<DataOperation> {
     public void invoke(DataOperation dataOperation, Context context) throws Exception {
         try {
             String sql = generateSql(dataOperation);
-            System.out.println(sql);
             preparedStatement = connection.prepareStatement(sql);
             for (int i = 0; i < dataOperation.getContentList().size(); i++) {
                 preparedStatement.setString(i + 1, dataOperation.getContentList().get(i));
             }
+
             preparedStatement.executeUpdate();
+            // 这里还需要添加维护relationship的操作
+            System.out.println(preparedStatement);
+
         } catch (Exception e) {
             System.err.println("Error while writing to database: " + e.getMessage());
         }

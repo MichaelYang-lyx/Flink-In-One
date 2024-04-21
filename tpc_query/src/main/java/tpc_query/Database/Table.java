@@ -7,7 +7,7 @@ public abstract class Table implements ITable {
     public boolean isRoot;
     public boolean isLeaf;
     public int numChild;
-    public String parent;
+    public List<String> parent;
     public List<String> childs;
 
     public String toString() {

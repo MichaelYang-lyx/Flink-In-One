@@ -18,9 +18,9 @@ public class MemoryTable extends Table {
         this.tableName = tableName;
         this.isRoot = info.f0;
         this.isLeaf = info.f1;
-        this.parent = info.f2;
+        this.parents = info.f2;
         this.numChild = info.f3;
-        this.childs = info.f4;
+        this.children = info.f4;
     }
 
     @Override
@@ -53,9 +53,9 @@ public class MemoryTable extends Table {
                 "tableName='" + tableName + '\'' +
                 ", isRoot=" + isRoot +
                 ", isLeaf=" + isLeaf +
-                ", parent='" + parent + '\'' +
+                ", parent='" + parents + '\'' +
                 ", numChild=" + numChild +
-                ", childs=" + childs +
+                ", childs=" + children +
                 ", dataMap=" + dataMap +
                 '}';
     }

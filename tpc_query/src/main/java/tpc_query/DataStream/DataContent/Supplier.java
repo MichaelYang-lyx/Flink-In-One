@@ -36,6 +36,10 @@ public class Supplier implements IDataContent {
                 S_COMMENT);
     }
 
+    public String primaryKeyString() {
+        return String.valueOf(S_SUPPKEY);
+    }
+
     public String toString() {
         return "Supplier { S_SUPPKEY=" + S_SUPPKEY + ", S_NAME=" + S_NAME + ", S_ADDRESS=" + S_ADDRESS
                 + ", S_NATIONKEY="

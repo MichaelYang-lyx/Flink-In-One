@@ -1,5 +1,6 @@
 package tpc_query;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,6 +21,8 @@ import tpc_query.Database.MemoryTable;
 import tpc_query.Database.MySQLConnector;
 import tpc_query.Database.MySQLSink;
 import tpc_query.Database.TableController;
+
+import tpc_query.Update.Insert;
 
 public class Main {
 
@@ -43,7 +46,15 @@ public class Main {
         TableController tableController = new TableController("memory");
         tableController.setupTables(query);
         MemoryTable memoryTable = (MemoryTable) tableController.tables.get("Customer");
-        System.out.println(memoryTable.childs);
+        System.out.println(memoryTable.children);
+        System.out.println(memoryTable.parents);
+
+        for (String item : memoryTable.parents) {
+            System.out.println(item);
+        }
+
+        Insert insert = new Insert();
+
         // System.out.println(tableController.tables);
         // System.out.println(tableController);
         env.execute("TPC-H Query");

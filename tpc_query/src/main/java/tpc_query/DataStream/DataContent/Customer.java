@@ -27,6 +27,10 @@ public class Customer implements IDataContent {
         this.C_COMMENT = string[7];
     }
 
+    public String primaryKeyString() {
+        return String.valueOf(C_CUSTKEY);
+    }
+
     public int getC_CUSTKEY() {
         return C_CUSTKEY;
     }

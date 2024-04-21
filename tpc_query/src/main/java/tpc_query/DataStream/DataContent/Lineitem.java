@@ -43,6 +43,10 @@ public class LineItem implements IDataContent {
         this.L_COMMENT = string[15];
     }
 
+    public String primaryKeyString() {
+        return L_ORDERKEY + "," + L_LINENUMBER;
+    }
+
     public List<String> toList() {
         return Arrays.asList(String.valueOf(L_ORDERKEY), String.valueOf(L_PARTKEY), String.valueOf(L_SUPPKEY),
                 String.valueOf(L_LINENUMBER), String.valueOf(L_QUANTITY), String.valueOf(L_EXTENDEDPRICE),

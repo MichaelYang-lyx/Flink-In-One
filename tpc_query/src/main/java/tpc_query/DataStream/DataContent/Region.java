@@ -17,6 +17,10 @@ public class Region implements IDataContent {
         this.R_COMMENT = string[2];
     }
 
+    public String primaryKeyString() {
+        return String.valueOf(R_REGIONKEY);
+    }
+
     public int getR_REGIONKEY() {
         return R_REGIONKEY;
     }

@@ -1,0 +1,5 @@
+
+redis-server --port 6380
+redis-cli shutdown
+
+redis-cli -p 6379 SHUTDOWN

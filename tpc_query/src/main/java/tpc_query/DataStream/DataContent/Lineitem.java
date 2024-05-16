@@ -3,7 +3,7 @@ package tpc_query.DataStream.DataContent;
 import java.util.Arrays;
 import java.util.List;
 
-public class LineItem implements IDataContent {
+public class LineItem extends DataContent {
     private int L_ORDERKEY;
     private int L_PARTKEY;
     private int L_SUPPKEY;

@@ -26,8 +26,6 @@ public class MySQLTable extends Table {
         this.numChild = info.f3;
         this.children = info.f4;
         this.indexLiveTuple = new Hashtable<Long, String>();
-
-        this.indexLiveTuple = new Hashtable<Long, String>();
         this.indexNonLiveTuple = new Hashtable<Long, String>();
         this.sCounter = new Hashtable<Long, Integer>();
         this.indexTableAndTableChildInfo = new Hashtable<String, HashMap<Long, ArrayList<Long>>>();

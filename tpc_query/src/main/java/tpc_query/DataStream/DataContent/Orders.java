@@ -3,7 +3,7 @@ package tpc_query.DataStream.DataContent;
 import java.util.Arrays;
 import java.util.List;
 
-public class Orders implements IDataContent {
+public class Orders extends DataContent {
     private int O_ORDERKEY;
     private int O_CUSTKEY;
     private char O_ORDERSTATUS;
@@ -27,6 +27,10 @@ public class Orders implements IDataContent {
         this.O_CLERK = string[6];
         this.O_SHIPPRIORITY = Integer.parseInt(string[7]);
         this.O_COMMENT = string[8];
+    }
+
+    public String primaryKeyString() {
+        return String.valueOf(O_ORDERKEY);
     }
 
     public int getO_ORDERKEY() {

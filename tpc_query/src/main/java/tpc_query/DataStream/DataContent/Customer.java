@@ -3,7 +3,7 @@ package tpc_query.DataStream.DataContent;
 import java.util.Arrays;
 import java.util.List;
 
-public class Customer implements IDataContent {
+public class Customer extends DataContent {
     private int C_CUSTKEY;
     private String C_NAME;
     private String C_ADDRESS;

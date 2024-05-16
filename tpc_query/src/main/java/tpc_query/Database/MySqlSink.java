@@ -10,6 +10,9 @@ import java.util.Collections;
 import java.util.List;
 
 import tpc_query.DataStream.DataOperation;
+import tpc_query.Query.IQuery;
+import tpc_query.Query.Q5;
+import tpc_query.Update.Insert;
 
 public class MySQLSink extends RichSinkFunction<DataOperation> {
     private Connection connection;
@@ -50,6 +53,20 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
 
     @Override
     public void invoke(DataOperation dataOperation, Context context) throws Exception {
+        // below for test
+        TableController tableController = new TableController("MySQL");
+        System.out.println("11221");
+        IQuery query = new Q5();
+        tableController.setupTables(query);
+        MySQLTable mySQLTable = (MySQLTable) tableController.tables.get("Customer");
+        Insert insert = new Insert();
+        insert.insert(mySQLTable, dataOperation);
+
+        for (String item : mySQLTable.parents) {
+            System.out.println(item);
+        }
+        // above for test
+
         try {
             String sql = generateSql(dataOperation);
             preparedStatement = connection.prepareStatement(sql);

@@ -20,6 +20,7 @@ import tpc_query.DataStream.TPCSource;
 import tpc_query.Database.MemoryTable;
 import tpc_query.Database.MySQLConnector;
 import tpc_query.Database.MySQLSink;
+import tpc_query.Database.MySQLTable;
 import tpc_query.Database.TableController;
 
 import tpc_query.Update.Insert;
@@ -40,23 +41,9 @@ public class Main {
         // Create the JDBC sink outside the invoke method
 
         // System.out.print("Creating JDBC sink");
-        // MySQLConnector.clearTPCHData();
-        // dataSource.addSink(new MySQLSink());
+        MySQLConnector.clearTPCHData();
+        dataSource.addSink(new MySQLSink()); // 要用
 
-        TableController tableController = new TableController("memory");
-        tableController.setupTables(query);
-        MemoryTable memoryTable = (MemoryTable) tableController.tables.get("Customer");
-        System.out.println(memoryTable.children);
-        System.out.println(memoryTable.parents);
-
-        for (String item : memoryTable.parents) {
-            System.out.println(item);
-        }
-
-        Insert insert = new Insert();
-
-        // System.out.println(tableController.tables);
-        // System.out.println(tableController);
         env.execute("TPC-H Query");
     }
 }

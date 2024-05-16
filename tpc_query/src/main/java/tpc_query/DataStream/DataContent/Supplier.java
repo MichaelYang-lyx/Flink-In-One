@@ -3,7 +3,7 @@ package tpc_query.DataStream.DataContent;
 import java.util.Arrays;
 import java.util.List;
 
-public class Supplier implements IDataContent {
+public class Supplier extends DataContent {
     private int S_SUPPKEY;
     private String S_NAME;
     private String S_ADDRESS;

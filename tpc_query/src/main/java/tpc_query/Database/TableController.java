@@ -37,7 +37,13 @@ public class TableController {
                 this.tables.put(tableName, table);
             }
         } else if (this.type.equals("MySQL")) {
-
+            this.tables = new HashMap<>();
+            for (Map.Entry<String, Tuple5<Boolean, Boolean, List<String>, Integer, List<String>>> entry : tableInfo
+                    .entrySet()) {
+                String tableName = entry.getKey();
+                ITable table = new MySQLTable(tableName, entry.getValue());
+                this.tables.put(tableName, table);
+            }
             /*
              * try {
              * MySQLConnector.createTPCHTable();

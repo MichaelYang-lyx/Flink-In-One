@@ -3,7 +3,7 @@ package tpc_query.DataStream.DataContent;
 import java.util.Arrays;
 import java.util.List;
 
-public class Region implements IDataContent {
+public class Region extends DataContent {
     private int R_REGIONKEY;
     private String R_NAME;
     private String R_COMMENT;

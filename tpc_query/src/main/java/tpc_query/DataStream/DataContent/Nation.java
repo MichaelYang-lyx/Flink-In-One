@@ -3,7 +3,7 @@ package tpc_query.DataStream.DataContent;
 import java.util.Arrays;
 import java.util.List;
 
-public class Nation implements IDataContent {
+public class Nation extends DataContent {
     private int N_NATIONKEY;
     private String N_NAME;
     private int N_REGIONKEY;
@@ -17,6 +17,10 @@ public class Nation implements IDataContent {
         this.N_NAME = string[1];
         this.N_REGIONKEY = Integer.parseInt(string[2]);
         this.N_COMMENT = string[3];
+    }
+
+    public String primaryKeyString() {
+        return String.valueOf(N_NATIONKEY);
     }
 
     public List<String> toList() {

@@ -17,6 +17,7 @@ public class Customer extends DataContent {
     }
 
     public Customer(String[] string) {
+        super();
         this.C_CUSTKEY = Integer.parseInt(string[0]);
         this.C_NAME = string[1];
         this.C_ADDRESS = string[2];
@@ -25,6 +26,7 @@ public class Customer extends DataContent {
         this.C_ACCTBAL = Double.parseDouble(string[5]);
         this.C_MKTSEGMENT = string[6];
         this.C_COMMENT = string[7];
+        
     }
 
     public String primaryKeyString() {

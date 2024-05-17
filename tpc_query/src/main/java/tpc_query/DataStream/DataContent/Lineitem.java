@@ -25,6 +25,7 @@ public class LineItem extends DataContent {
     }
 
     public LineItem(String[] string) {
+        super();
         this.L_ORDERKEY = Integer.parseInt(string[0]);
         this.L_PARTKEY = Integer.parseInt(string[1]);
         this.L_SUPPKEY = Integer.parseInt(string[2]);

@@ -1,6 +1,7 @@
 package tpc_query.Update;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.UUID;
@@ -44,12 +45,15 @@ public class Insert extends Update {
 
     public void insert(MySQLTable table, DataOperation dataOperation) {
 
+        // 这里
         if (!table.isLeaf) {
             table.sCounter.put(dataOperation.dataContent.primaryKeyLong(), 0);
             for (String childName : table.children) {
                 // I(R, Rc ) ← I(R, Rc ) + (πPK(Rc )t → πPK(R),PK(Rc )t)
                 // initialize I(R,Rc) if null
                 System.out.println(childName);
+                table.indexTableAndTableChildInfo.computeIfAbsent(childName, k -> new HashMap<Long, ArrayList<Long>>());
+                Long tupleForeignKey = updateTuple.foreignKeyMapping.get(childName);
                 // tupleTable.indexTableAndTableChildInfo.computeIfAbsent(childName,
                 // k -> new HashMap<Long, ArrayList<Long>>());
             }

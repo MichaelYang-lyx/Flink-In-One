@@ -1,6 +1,7 @@
 package tpc_query.DataStream.DataContent;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Nation extends DataContent {
@@ -13,6 +14,7 @@ public class Nation extends DataContent {
     }
 
     public Nation(String[] string) {
+        super();
         this.N_NATIONKEY = Integer.parseInt(string[0]);
         this.N_NAME = string[1];
         this.N_REGIONKEY = Integer.parseInt(string[2]);
@@ -31,4 +33,5 @@ public class Nation extends DataContent {
         return "Nation [N_NATIONKEY=" + N_NATIONKEY + ", N_NAME=" + N_NAME + ", N_REGIONKEY=" + N_REGIONKEY
                 + ", N_COMMENT=" + N_COMMENT + "]";
     }
+
 }

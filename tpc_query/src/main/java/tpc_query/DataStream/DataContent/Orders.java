@@ -18,6 +18,7 @@ public class Orders extends DataContent {
     }
 
     public Orders(String[] string) {
+        super();
         this.O_ORDERKEY = Integer.parseInt(string[0]);
         this.O_CUSTKEY = Integer.parseInt(string[1]);
         this.O_ORDERSTATUS = string[2].charAt(0);

@@ -1,5 +1,6 @@
 package tpc_query.Database;
 
+import tpc_query.DataStream.DataContent.IDataContent;
 import tpc_query.Database.MySQLConnector;
 
 import java.util.ArrayList;
@@ -25,8 +26,8 @@ public class MySQLTable extends Table {
         this.parents = info.f2;
         this.numChild = info.f3;
         this.children = info.f4;
-        this.indexLiveTuple = new Hashtable<Long, String>();
-        this.indexNonLiveTuple = new Hashtable<Long, String>();
+        this.indexLiveTuple = new Hashtable<Long, IDataContent>();
+        this.indexNonLiveTuple = new Hashtable<Long, IDataContent>();
         this.sCounter = new Hashtable<Long, Integer>();
         this.indexTableAndTableChildInfo = new Hashtable<String, HashMap<Long, ArrayList<Long>>>();
 

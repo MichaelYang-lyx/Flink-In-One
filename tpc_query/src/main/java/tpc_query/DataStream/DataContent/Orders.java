@@ -1,11 +1,12 @@
 package tpc_query.DataStream.DataContent;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Orders extends DataContent {
-    private int O_ORDERKEY;
-    private int O_CUSTKEY;
+    private Long O_ORDERKEY;
+    private Long O_CUSTKEY;
     private char O_ORDERSTATUS;
     private double O_TOTALPRICE;
     private String O_ORDERDATE;
@@ -19,8 +20,8 @@ public class Orders extends DataContent {
 
     public Orders(String[] string) {
         super();
-        this.O_ORDERKEY = Integer.parseInt(string[0]);
-        this.O_CUSTKEY = Integer.parseInt(string[1]);
+        this.O_ORDERKEY = Long.parseLong(string[0]);
+        this.O_CUSTKEY = Long.parseLong(string[1]);
         this.O_ORDERSTATUS = string[2].charAt(0);
         this.O_TOTALPRICE = Double.parseDouble(string[3]);
         this.O_ORDERDATE = string[4];
@@ -34,11 +35,11 @@ public class Orders extends DataContent {
         return String.valueOf(O_ORDERKEY);
     }
 
-    public int getO_ORDERKEY() {
+    public Long getO_ORDERKEY() {
         return O_ORDERKEY;
     }
 
-    public int getO_CUSTKEY() {
+    public Long getO_CUSTKEY() {
         return O_CUSTKEY;
     }
 
@@ -82,4 +83,12 @@ public class Orders extends DataContent {
                 + O_ORDERPRIORITY + ", O_CLERK=" + O_CLERK + ", O_SHIPPRIORITY=" + O_SHIPPRIORITY + ", O_COMMENT="
                 + O_COMMENT + "]";
     }
+
+    public HashMap<String, Long> getForeignKey() {
+        HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
+        foreignKeyMapping.put("Customer", O_CUSTKEY);
+
+        return foreignKeyMapping;
+    };
+
 }

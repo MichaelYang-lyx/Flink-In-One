@@ -1,13 +1,14 @@
 package tpc_query.DataStream.DataContent;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Customer extends DataContent {
     private int C_CUSTKEY;
     private String C_NAME;
     private String C_ADDRESS;
-    private int C_NATIONKEY;
+    private Long C_NATIONKEY;
     private String C_PHONE;
     private double C_ACCTBAL;
     private String C_MKTSEGMENT;
@@ -21,12 +22,12 @@ public class Customer extends DataContent {
         this.C_CUSTKEY = Integer.parseInt(string[0]);
         this.C_NAME = string[1];
         this.C_ADDRESS = string[2];
-        this.C_NATIONKEY = Integer.parseInt(string[3]);
+        this.C_NATIONKEY = Long.parseLong(string[3]);
         this.C_PHONE = string[4];
         this.C_ACCTBAL = Double.parseDouble(string[5]);
         this.C_MKTSEGMENT = string[6];
         this.C_COMMENT = string[7];
-        
+
     }
 
     public String primaryKeyString() {
@@ -45,7 +46,7 @@ public class Customer extends DataContent {
         return C_ADDRESS;
     }
 
-    public int getC_NATIONKEY() {
+    public Long getC_NATIONKEY() {
         return C_NATIONKEY;
     }
 
@@ -75,5 +76,11 @@ public class Customer extends DataContent {
                 + ", C_NATIONKEY="
                 + C_NATIONKEY + ", C_PHONE=" + C_PHONE + ", C_ACCTBAL=" + C_ACCTBAL + ", C_MKTSEGMENT=" + C_MKTSEGMENT
                 + ", C_COMMENT=" + C_COMMENT + "}";
+    }
+
+    public HashMap<String, Long> getForeignKey() {
+        HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
+        foreignKeyMapping.put("Nation", C_NATIONKEY);
+        return foreignKeyMapping;
     }
 }

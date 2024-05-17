@@ -1,12 +1,13 @@
 package tpc_query.DataStream.DataContent;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class LineItem extends DataContent {
-    private int L_ORDERKEY;
+    private Long L_ORDERKEY;
     private int L_PARTKEY;
-    private int L_SUPPKEY;
+    private Long L_SUPPKEY;
     private int L_LINENUMBER;
     private double L_QUANTITY;
     private double L_EXTENDEDPRICE;
@@ -26,9 +27,9 @@ public class LineItem extends DataContent {
 
     public LineItem(String[] string) {
         super();
-        this.L_ORDERKEY = Integer.parseInt(string[0]);
+        this.L_ORDERKEY = Long.parseLong(string[0]);
         this.L_PARTKEY = Integer.parseInt(string[1]);
-        this.L_SUPPKEY = Integer.parseInt(string[2]);
+        this.L_SUPPKEY = Long.parseLong(string[2]);
         this.L_LINENUMBER = Integer.parseInt(string[3]);
         this.L_QUANTITY = Double.parseDouble(string[4]);
         this.L_EXTENDEDPRICE = Double.parseDouble(string[5]);
@@ -64,4 +65,11 @@ public class LineItem extends DataContent {
                 + ", L_RECEIPTDATE=" + L_RECEIPTDATE + ", L_SHIPINSTRUCT=" + L_SHIPINSTRUCT + ", L_SHIPMODE="
                 + L_SHIPMODE + ", L_COMMENT=" + L_COMMENT + "]";
     }
+
+    public HashMap<String, Long> getForeignKey() {
+        HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
+        foreignKeyMapping.put("Supplier", L_SUPPKEY);
+        foreignKeyMapping.put("Orders", L_ORDERKEY);
+        return foreignKeyMapping;
+    };
 }

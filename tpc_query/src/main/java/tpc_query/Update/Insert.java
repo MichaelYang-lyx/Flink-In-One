@@ -1,9 +1,11 @@
 package tpc_query.Update;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import tpc_query.DataStream.DataOperation;
@@ -43,21 +45,75 @@ public class Insert extends Update {
 
     }
 
-    public void insert(MySQLTable table, DataOperation dataOperation) {
-
+    public void insert(Map<String, ITable> tables, DataOperation dataOperation) {
+        String tableName = dataOperation.getTableName();
+        MySQLTable thisTable = (MySQLTable) tables.get(tableName);
         // 这里
-        if (!table.isLeaf) {
-            table.sCounter.put(dataOperation.dataContent.primaryKeyLong(), 0);
-            for (String childName : table.children) {
+        Long thisPrimaryKey = dataOperation.dataContent.primaryKeyLong();
+        if (!thisTable.isLeaf) {
+            thisTable.sCounter.put(thisPrimaryKey, 0);
+            for (String childName : thisTable.children) {
                 // I(R, Rc ) ← I(R, Rc ) + (πPK(Rc )t → πPK(R),PK(Rc )t)
                 // initialize I(R,Rc) if null
-                System.out.println(childName);
-                table.indexTableAndTableChildInfo.computeIfAbsent(childName, k -> new HashMap<Long, ArrayList<Long>>());
-                Long tupleForeignKey = updateTuple.foreignKeyMapping.get(childName);
-                // tupleTable.indexTableAndTableChildInfo.computeIfAbsent(childName,
-                // k -> new HashMap<Long, ArrayList<Long>>());
+
+                thisTable.indexTableAndTableChildInfo.computeIfAbsent(childName,
+                        k -> new HashMap<Long, ArrayList<Long>>());
+                HashMap<Long, ArrayList<Long>> childRelation = thisTable.indexTableAndTableChildInfo.get(childName);
+                // 这个tuple在child table中的外键
+                Long tupleForeignKey = dataOperation.dataContent.getforeignKeyMapping().get(childName);
+
+                try {
+                    // initialize an arraylist if not exist the key
+                    // lst: 这个child 外键->这个tuble的主键list
+                    ArrayList<Long> lst = childRelation.get(tupleForeignKey);
+                    // System.out.println("=========");
+                    // System.out.println(lst);
+                    // System.out.println(tupleForeignKey);
+                    // System.out.println("=========");
+                    if (lst != null) {
+
+                        if (lst.contains(thisPrimaryKey)) {
+                            throw new Exception("Should not have same primary key. Assign Lineitem Unique primary Key");
+                        }
+                        lst.add(thisPrimaryKey);
+                    } else {
+                        childRelation.put(tupleForeignKey, new ArrayList<>(Arrays.asList(thisPrimaryKey)));
+                        System.out.println(lst);
+                        // table.indexTableAndTableChildInfo.get(childName).put(tupleForeignKey,new
+                        // ArrayList<>(List.of(updateTuple.primaryKey)));
+                    }
+                    // if πPK(Rc)t ∈ I(Rc) then s(t) ← s(t) + 1
+                    // if this tuple foreign key appear in child table live tuple set, increase
+                    // tuple counter by 1
+
+                    ;
+                    MySQLTable childTable = (MySQLTable) tables.get(childName);
+                    System.out.println("==========");
+                    System.out.println(childName);
+                    System.out.println(childTable);
+                    System.out.println(childTable.indexLiveTuple);
+                    System.out.println("==========");
+                    if (childTable.indexLiveTuple.containsKey(tupleForeignKey)) {
+                        System.out.println("222222");
+                        int curCount = thisTable.sCounter.get(thisPrimaryKey);
+                        thisTable.sCounter.put(thisPrimaryKey, curCount + 1);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
 
+        }
+        // if R is a leaf or s(t) = |C(R)| then
+        if (thisTable.isLeaf || (thisTable.sCounter.get(thisPrimaryKey) == Math.abs(thisTable.numChild))) {
+
+            // insertUpdateAlgorithm(tableState, updateTuple, collector);
+        }
+
+        // else I(N(R)) ← I(N(R)) + (πPK(R)t → t) put this tuple to non live tuple set.
+        else {
+            thisTable.indexNonLiveTuple.put(thisPrimaryKey, dataOperation.dataContent);
         }
     };
     /*

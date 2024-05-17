@@ -33,11 +33,11 @@ public class Q5 implements IQuery, Serializable {
     }
 
     public void registerTables(Map<String, Tuple5<Boolean, Boolean, List<String>, Integer, List<String>>> tableMap) {
-        addTable(tableMap, "LineItme", true, false, null, 2, Arrays.asList("Orders", "Supplier"));
-        addTable(tableMap, "Orders", false, false, Arrays.asList("LineItme"), 1, Arrays.asList("Customer"));
-        addTable(tableMap, "Customer", false, false, Arrays.asList("Orders"), 1, Arrays.asList("Nation2"));
-        addTable(tableMap, "Supplier", false, false, Arrays.asList("Lineitem"), 1, Arrays.asList("Nation1"));
-        addTable(tableMap, "Nation1", false, true, Arrays.asList("Supplier"), 0, new ArrayList<>());
+        addTable(tableMap, "LINEITEM", true, false, null, 2, Arrays.asList("ORDERS", "SUPPLIER"));
+        addTable(tableMap, "ORDERS", false, false, Arrays.asList("LINEITEM"), 1, Arrays.asList("CUSTOMER"));
+        addTable(tableMap, "CUSTOMER", false, false, Arrays.asList("ORDERS"), 1, Arrays.asList("SUPPLIER"));
+        addTable(tableMap, "SUPPLIER", false, false, Arrays.asList("LINEITEM", "CUSTOMER"), 1, Arrays.asList("NATION"));
+        addTable(tableMap, "NATION", false, true, Arrays.asList("SUPPLIER"), 1, Arrays.asList("REGION"));
+        addTable(tableMap, "REGION", false, true, Arrays.asList("NATION"), 0, new ArrayList<>());
     }
-
 }

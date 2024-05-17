@@ -1,6 +1,7 @@
 package tpc_query.DataStream.DataContent;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Region extends DataContent {
@@ -41,4 +42,9 @@ public class Region extends DataContent {
     public String toString() {
         return "Region [R_REGIONKEY=" + R_REGIONKEY + ", R_NAME=" + R_NAME + ", R_COMMENT=" + R_COMMENT + "]";
     }
+
+    public HashMap<String, Long> getForeignKey() {
+        HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
+        return foreignKeyMapping;
+    };
 }

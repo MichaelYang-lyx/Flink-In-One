@@ -7,7 +7,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import tpc_query.DataStream.DataOperation;
 import tpc_query.Query.IQuery;
@@ -55,12 +57,12 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
     public void invoke(DataOperation dataOperation, Context context) throws Exception {
         // below for test
         TableController tableController = new TableController("MySQL");
-        System.out.println("11221");
         IQuery query = new Q5();
         tableController.setupTables(query);
-        MySQLTable mySQLTable = (MySQLTable) tableController.tables.get("Customer");
+        Map<String, ITable> tables = tableController.tables;
+
         Insert insert = new Insert();
-        insert.insert(mySQLTable, dataOperation);
+        insert.insert(tables, dataOperation);
 
         // for (String item : mySQLTable.parents) {
         // System.out.println(item);

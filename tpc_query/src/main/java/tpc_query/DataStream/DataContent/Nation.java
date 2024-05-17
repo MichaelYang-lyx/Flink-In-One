@@ -34,4 +34,9 @@ public class Nation extends DataContent {
                 + ", N_COMMENT=" + N_COMMENT + "]";
     }
 
+    public HashMap<String, Long> getForeignKey() {
+        HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
+        return foreignKeyMapping;
+    };
+
 }

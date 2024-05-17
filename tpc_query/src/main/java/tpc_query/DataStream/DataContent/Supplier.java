@@ -49,7 +49,7 @@ public class Supplier extends DataContent {
 
     public HashMap<String, Long> getForeignKey() {
         HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
-        foreignKeyMapping.put("Nation1", S_NATIONKEY);
+        foreignKeyMapping.put("Nation", S_NATIONKEY);
         return foreignKeyMapping;
     }
 }

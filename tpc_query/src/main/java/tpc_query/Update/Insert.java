@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import tpc_query.DataStream.DataOperation;
@@ -78,7 +79,7 @@ public class Insert extends Update {
                         lst.add(thisPrimaryKey);
                     } else {
                         childRelation.put(tupleForeignKey, new ArrayList<>(Arrays.asList(thisPrimaryKey)));
-                        System.out.println(lst);
+                        // System.out.println(lst);
                         // table.indexTableAndTableChildInfo.get(childName).put(tupleForeignKey,new
                         // ArrayList<>(List.of(updateTuple.primaryKey)));
                     }
@@ -88,13 +89,9 @@ public class Insert extends Update {
 
                     ;
                     MySQLTable childTable = (MySQLTable) tables.get(childName);
-                    System.out.println("==========");
-                    System.out.println(childName);
-                    System.out.println(childTable);
-                    System.out.println(childTable.indexLiveTuple);
-                    System.out.println("==========");
+
                     if (childTable.indexLiveTuple.containsKey(tupleForeignKey)) {
-                        System.out.println("222222");
+
                         int curCount = thisTable.sCounter.get(thisPrimaryKey);
                         thisTable.sCounter.put(thisPrimaryKey, curCount + 1);
                     }

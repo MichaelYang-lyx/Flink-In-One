@@ -2,6 +2,7 @@ package tpc_query.DataStream.DataContent;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public abstract class DataContent implements IDataContent {
@@ -16,10 +17,6 @@ public abstract class DataContent implements IDataContent {
 
     public HashMap<String, Long> foreignKeyMapping;
 
-    public DataContent() {
-        this.foreignKeyMapping = this.getForeignKey();
-    }
-
     public Long primaryKeyLong() {
         String str = this.primaryKeyString();
         UUID uuid = UUID.nameUUIDFromBytes(str.getBytes());
@@ -28,6 +25,7 @@ public abstract class DataContent implements IDataContent {
     };
 
     public HashMap<String, Long> getforeignKeyMapping() {
+
         return this.foreignKeyMapping;
     };
 

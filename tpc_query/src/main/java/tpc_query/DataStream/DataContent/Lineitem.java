@@ -3,6 +3,7 @@ package tpc_query.DataStream.DataContent;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class LineItem extends DataContent {
     private Long L_ORDERKEY;
@@ -43,6 +44,7 @@ public class LineItem extends DataContent {
         this.L_SHIPINSTRUCT = string[13];
         this.L_SHIPMODE = string[14];
         this.L_COMMENT = string[15];
+        this.foreignKeyMapping = this.getForeignKey();
     }
 
     public String primaryKeyString() {
@@ -67,9 +69,11 @@ public class LineItem extends DataContent {
     }
 
     public HashMap<String, Long> getForeignKey() {
+
         HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
-        foreignKeyMapping.put("Supplier", L_SUPPKEY);
-        foreignKeyMapping.put("Orders", L_ORDERKEY);
+        foreignKeyMapping.put("SUPPLIER", L_SUPPKEY);
+        foreignKeyMapping.put("ORDERS", L_ORDERKEY);
+
         return foreignKeyMapping;
     };
 }

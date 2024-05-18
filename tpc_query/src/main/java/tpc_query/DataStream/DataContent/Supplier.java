@@ -24,6 +24,7 @@ public class Supplier extends DataContent {
         this.S_PHONE = string[4];
         this.S_ACCTBAL = Double.parseDouble(string[5]);
         this.S_COMMENT = string[6];
+        this.foreignKeyMapping = this.getForeignKey();
     }
 
     public List<String> toList() {
@@ -49,7 +50,8 @@ public class Supplier extends DataContent {
 
     public HashMap<String, Long> getForeignKey() {
         HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
-        foreignKeyMapping.put("Nation", S_NATIONKEY);
+        foreignKeyMapping.put("NATION", S_NATIONKEY);
+
         return foreignKeyMapping;
     }
 }

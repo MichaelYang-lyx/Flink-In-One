@@ -17,6 +17,7 @@ public class Region extends DataContent {
         this.R_REGIONKEY = Integer.parseInt(string[0]);
         this.R_NAME = string[1];
         this.R_COMMENT = string[2];
+        this.foreignKeyMapping = this.getForeignKey();
     }
 
     public String primaryKeyString() {

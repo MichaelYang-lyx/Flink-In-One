@@ -49,7 +49,6 @@ public class Insert extends Update {
     public void insert(Map<String, ITable> tables, DataOperation dataOperation) {
         String tableName = dataOperation.getTableName();
         MySQLTable thisTable = (MySQLTable) tables.get(tableName);
-        // 这里
         Long thisPrimaryKey = dataOperation.dataContent.primaryKeyLong();
         System.out.println("------ primarykey: " + thisPrimaryKey);
         if (!thisTable.isLeaf) {
@@ -95,7 +94,7 @@ public class Insert extends Update {
         }
         // if R is a leaf or s(t) = |C(R)| then
         if (thisTable.isLeaf || (thisTable.sCounter.get(thisPrimaryKey) == Math.abs(thisTable.numChild))) {
-
+            insertUpdate(tables, dataOperation);
             // insertUpdateAlgorithm(tableState, updateTuple, collector);
         }
 
@@ -104,6 +103,26 @@ public class Insert extends Update {
             thisTable.indexNonLiveTuple.put(thisPrimaryKey, dataOperation.dataContent);
         }
     };
+
+    public void insertUpdate(Map<String, ITable> tables, DataOperation dataOperation) {
+        String tableName = dataOperation.getTableName();
+        MySQLTable thisTable = (MySQLTable) tables.get(tableName);
+        Long thisPrimaryKey = dataOperation.dataContent.primaryKeyLong();
+        if (thisTable.isRoot && (thisTable.sCounter.get(thisPrimaryKey) == thisTable.numChild)) {
+            // Perform Join
+            // System.out.println("Insert Tuple " + updateTuple.toString());
+            // Tuple4<String, String, Integer, Double> result =
+            // getSelectedTuple(allTableState, updateTuple.primaryKey);
+            // joinResultState.put(updateTuple.primaryKey, result);
+
+        } else {
+            System.out.println("=============== Parents =================");
+            System.out.println(thisTable);
+            for (String parent : thisTable.parents) {
+                System.out.println(parent);
+            }
+        }
+    }
     /*
      * public void insertAlgorithm(MapState<String, TableLogger> allTableState,
      * Update updateTuple,

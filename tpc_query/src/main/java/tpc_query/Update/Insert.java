@@ -51,53 +51,44 @@ public class Insert extends Update {
         MySQLTable thisTable = (MySQLTable) tables.get(tableName);
         // 这里
         Long thisPrimaryKey = dataOperation.dataContent.primaryKeyLong();
+        System.out.println("------ primarykey: " + thisPrimaryKey);
         if (!thisTable.isLeaf) {
             thisTable.sCounter.put(thisPrimaryKey, 0);
             for (String childName : thisTable.children) {
                 // I(R, Rc ) ← I(R, Rc ) + (πPK(Rc )t → πPK(R),PK(Rc )t)
-                // initialize I(R,Rc) if null
-
                 thisTable.indexTableAndTableChildInfo.computeIfAbsent(childName,
                         k -> new HashMap<Long, ArrayList<Long>>());
                 HashMap<Long, ArrayList<Long>> childRelation = thisTable.indexTableAndTableChildInfo.get(childName);
                 // 这个tuple在child table中的外键
                 Long tupleForeignKey = dataOperation.dataContent.getforeignKeyMapping().get(childName);
 
-                try {
-                    // initialize an arraylist if not exist the key
-                    // lst: 这个child 外键->这个tuble的主键list
-                    ArrayList<Long> lst = childRelation.get(tupleForeignKey);
-                    // System.out.println("=========");
-                    // System.out.println(lst);
-                    // System.out.println(tupleForeignKey);
-                    // System.out.println("=========");
-                    if (lst != null) {
+                // initialize an arraylist if not exist the key
+                // lst: 这个child 外键->这个tuble的主键list
+                ArrayList<Long> lst = childRelation.get(tupleForeignKey);
+                if (lst != null) {
 
-                        if (lst.contains(thisPrimaryKey)) {
+                    if (lst.contains(thisPrimaryKey)) {
+                        try {
                             throw new Exception("Should not have same primary key. Assign Lineitem Unique primary Key");
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                        lst.add(thisPrimaryKey);
-                    } else {
-                        childRelation.put(tupleForeignKey, new ArrayList<>(Arrays.asList(thisPrimaryKey)));
-                        // System.out.println(lst);
-                        // table.indexTableAndTableChildInfo.get(childName).put(tupleForeignKey,new
-                        // ArrayList<>(List.of(updateTuple.primaryKey)));
                     }
-                    // if πPK(Rc)t ∈ I(Rc) then s(t) ← s(t) + 1
-                    // if this tuple foreign key appear in child table live tuple set, increase
-                    // tuple counter by 1
+                    lst.add(thisPrimaryKey);
 
-                    ;
-                    MySQLTable childTable = (MySQLTable) tables.get(childName);
-
-                    if (childTable.indexLiveTuple.containsKey(tupleForeignKey)) {
-
-                        int curCount = thisTable.sCounter.get(thisPrimaryKey);
-                        thisTable.sCounter.put(thisPrimaryKey, curCount + 1);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } else {
+                    childRelation.put(tupleForeignKey, new ArrayList<>(Arrays.asList(thisPrimaryKey)));
                 }
+
+                MySQLTable childTable = (MySQLTable) tables.get(childName);
+                // if πPK(Rc)t ∈ I(Rc) then s(t) ← s(t) + 1
+                if (childTable.indexLiveTuple.containsKey(tupleForeignKey)) {
+                    int curCount = thisTable.sCounter.get(thisPrimaryKey);
+                    thisTable.sCounter.put(thisPrimaryKey, curCount + 1);
+                }
+
+                System.out.println("------ childRelation: " + childRelation);
+                // 这后面好像得加点东西
 
             }
 

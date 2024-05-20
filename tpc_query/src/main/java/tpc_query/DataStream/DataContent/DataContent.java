@@ -17,12 +17,14 @@ public abstract class DataContent implements IDataContent {
 
     public HashMap<String, Long> foreignKeyMapping;
 
-    public Long primaryKeyLong() {
-        String str = this.primaryKeyString();
-        UUID uuid = UUID.nameUUIDFromBytes(str.getBytes());
-        Long longUuid = uuid.getMostSignificantBits();
-        return longUuid;
-    };
+    /*
+     * public Long primaryKeyLong() {
+     * String str = this.primaryKeyString();
+     * UUID uuid = UUID.nameUUIDFromBytes(str.getBytes());
+     * Long longUuid = uuid.getMostSignificantBits();
+     * return longUuid;
+     * };
+     */
 
     public HashMap<String, Long> getforeignKeyMapping() {
 

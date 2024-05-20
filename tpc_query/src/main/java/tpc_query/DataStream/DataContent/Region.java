@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Region extends DataContent {
-    private int R_REGIONKEY;
+    private Long R_REGIONKEY;
     private String R_NAME;
     private String R_COMMENT;
 
@@ -14,7 +14,7 @@ public class Region extends DataContent {
 
     public Region(String[] string) {
         super();
-        this.R_REGIONKEY = Integer.parseInt(string[0]);
+        this.R_REGIONKEY = Long.parseLong(string[0]);
         this.R_NAME = string[1];
         this.R_COMMENT = string[2];
         this.foreignKeyMapping = this.getForeignKey();
@@ -24,7 +24,11 @@ public class Region extends DataContent {
         return String.valueOf(R_REGIONKEY);
     }
 
-    public int getR_REGIONKEY() {
+    public Long primaryKeyLong() {
+        return R_REGIONKEY;
+    }
+
+    public Long getR_REGIONKEY() {
         return R_REGIONKEY;
     }
 

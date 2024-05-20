@@ -64,11 +64,6 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
         Insert insert = new Insert();
         insert.insert(tables, dataOperation);
 
-        // for (String item : mySQLTable.parents) {
-        // System.out.println(item);
-        // }
-        // above for test
-
         try {
             String sql = generateSql(dataOperation);
             preparedStatement = connection.prepareStatement(sql);

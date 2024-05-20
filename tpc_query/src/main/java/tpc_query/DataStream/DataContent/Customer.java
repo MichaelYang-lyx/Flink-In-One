@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Customer extends DataContent {
-    private int C_CUSTKEY;
+    private Long C_CUSTKEY;
     private String C_NAME;
     private String C_ADDRESS;
     private Long C_NATIONKEY;
@@ -19,7 +19,7 @@ public class Customer extends DataContent {
 
     public Customer(String[] string) {
         super();
-        this.C_CUSTKEY = Integer.parseInt(string[0]);
+        this.C_CUSTKEY = Long.parseLong(string[0]);
         this.C_NAME = string[1];
         this.C_ADDRESS = string[2];
         this.C_NATIONKEY = Long.parseLong(string[3]);
@@ -31,11 +31,15 @@ public class Customer extends DataContent {
 
     }
 
+    public Long primaryKeyLong() {
+        return C_CUSTKEY;
+    }
+
     public String primaryKeyString() {
         return String.valueOf(C_CUSTKEY);
     }
 
-    public int getC_CUSTKEY() {
+    public Long getC_CUSTKEY() {
         return C_CUSTKEY;
     }
 

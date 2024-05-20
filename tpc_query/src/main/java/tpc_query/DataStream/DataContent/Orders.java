@@ -32,6 +32,10 @@ public class Orders extends DataContent {
         this.foreignKeyMapping = this.getForeignKey();
     }
 
+    public Long primaryKeyLong() {
+        return O_ORDERKEY;
+    }
+
     public String primaryKeyString() {
         return String.valueOf(O_ORDERKEY);
     }

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Supplier extends DataContent {
-    private int S_SUPPKEY;
+    private Long S_SUPPKEY;
     private String S_NAME;
     private String S_ADDRESS;
     private Long S_NATIONKEY;
@@ -17,7 +17,7 @@ public class Supplier extends DataContent {
     }
 
     public Supplier(String[] string) {
-        this.S_SUPPKEY = Integer.parseInt(string[0]);
+        this.S_SUPPKEY = Long.parseLong(string[0]);
         this.S_NAME = string[1];
         this.S_ADDRESS = string[2];
         this.S_NATIONKEY = Long.parseLong(string[3]);
@@ -25,6 +25,10 @@ public class Supplier extends DataContent {
         this.S_ACCTBAL = Double.parseDouble(string[5]);
         this.S_COMMENT = string[6];
         this.foreignKeyMapping = this.getForeignKey();
+    }
+
+    public Long primaryKeyLong() {
+        return S_SUPPKEY;
     }
 
     public List<String> toList() {

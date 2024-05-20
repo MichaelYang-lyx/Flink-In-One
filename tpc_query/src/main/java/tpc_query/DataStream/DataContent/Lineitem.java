@@ -9,7 +9,7 @@ public class LineItem extends DataContent {
     private Long L_ORDERKEY;
     private int L_PARTKEY;
     private Long L_SUPPKEY;
-    private int L_LINENUMBER;
+    private Long L_LINENUMBER;
     private double L_QUANTITY;
     private double L_EXTENDEDPRICE;
     private double L_DISCOUNT;
@@ -31,7 +31,7 @@ public class LineItem extends DataContent {
         this.L_ORDERKEY = Long.parseLong(string[0]);
         this.L_PARTKEY = Integer.parseInt(string[1]);
         this.L_SUPPKEY = Long.parseLong(string[2]);
-        this.L_LINENUMBER = Integer.parseInt(string[3]);
+        this.L_LINENUMBER = Long.parseLong(string[3]);
         this.L_QUANTITY = Double.parseDouble(string[4]);
         this.L_EXTENDEDPRICE = Double.parseDouble(string[5]);
         this.L_DISCOUNT = Double.parseDouble(string[6]);
@@ -45,6 +45,10 @@ public class LineItem extends DataContent {
         this.L_SHIPMODE = string[14];
         this.L_COMMENT = string[15];
         this.foreignKeyMapping = this.getForeignKey();
+    }
+
+    public Long primaryKeyLong() {
+        return L_LINENUMBER;
     }
 
     public String primaryKeyString() {

@@ -12,6 +12,8 @@ import java.util.UUID;
 
 import tpc_query.DataStream.DataOperation;
 import tpc_query.DataStream.DataContent.Customer;
+import tpc_query.DataStream.DataContent.DataContent;
+import tpc_query.DataStream.DataContent.IDataContent;
 import tpc_query.DataStream.DataContent.LineItem;
 import tpc_query.DataStream.DataContent.Nation;
 import tpc_query.DataStream.DataContent.Orders;
@@ -52,15 +54,16 @@ public class Insert extends Update {
         System.out.println("longUuid: " + longUuid);
         System.out.println("strUuid: " + strUuid);
         Insert insert_instance = new Insert();
-        insert_instance.insert(null, null, null);
+        insert_instance.insert(null, null, null, null);
 
     }
 
-    public void insert(Map<String, ITable> tables, DataOperation dataOperation,
+    public void insert(Map<String, ITable> tables, String tableName, IDataContent dataContent,
             MapState<Long, Tuple4<String, String, Integer, Double>> joinResultState) throws Exception {
-        String tableName = dataOperation.getTableName();
+
         MySQLTable thisTable = (MySQLTable) tables.get(tableName);
-        Long thisPrimaryKey = dataOperation.dataContent.primaryKeyLong();
+        Long thisPrimaryKey = dataContent.primaryKeyLong();
+        thisTable.allTuples.put(thisPrimaryKey, dataContent);
         if (!thisTable.isLeaf) {
             thisTable.sCounter.put(thisPrimaryKey, 0);
             for (String childName : thisTable.children) {
@@ -69,7 +72,7 @@ public class Insert extends Update {
                         k -> new HashMap<Long, ArrayList<Long>>());
                 HashMap<Long, ArrayList<Long>> childRelation = thisTable.indexTableAndTableChildInfo.get(childName);
                 // 这个tuple在child table中的外键
-                Long tupleForeignKey = dataOperation.dataContent.getforeignKeyMapping().get(childName);
+                Long tupleForeignKey = dataContent.getforeignKeyMapping().get(childName);
 
                 // initialize an arraylist if not exist the key
                 // lst: 这个child 外键->这个tuble的主键list
@@ -105,43 +108,64 @@ public class Insert extends Update {
         // if R is a leaf or s(t) = |C(R)| then
 
         if (thisTable.isLeaf || (thisTable.sCounter.get(thisPrimaryKey) == Math.abs(thisTable.numChild))) {
-            insertUpdate(tables, dataOperation, joinResultState);
+            insertUpdate(tables, tableName, dataContent, joinResultState);
             // insertUpdateAlgorithm(tableState, updateTuple, collector);
         }
 
         // else I(N(R)) ← I(N(R)) + (πPK(R)t → t) put this tuple to non live tuple set.
         else {
-            thisTable.indexNonLiveTuple.put(thisPrimaryKey, dataOperation.dataContent);
+            thisTable.indexNonLiveTuple.put(thisPrimaryKey, dataContent);
         }
     };
 
-    public void insertUpdate(Map<String, ITable> tables, DataOperation dataOperation,
+    public void insertUpdate(Map<String, ITable> tables, String tableName, IDataContent dataContent,
             MapState<Long, Tuple4<String, String, Integer, Double>> joinResultState) throws Exception {
-        String tableName = dataOperation.getTableName();
+
         MySQLTable thisTable = (MySQLTable) tables.get(tableName);
-        Long thisPrimaryKey = dataOperation.dataContent.primaryKeyLong();
+        Long thisPrimaryKey = dataContent.primaryKeyLong();
         if (tableName.equals("LINEITEM")) {
             System.out.println("@@@@@@@@@");
         }
-        thisTable.indexLiveTuple.put(thisPrimaryKey, dataOperation.dataContent);
+        thisTable.indexLiveTuple.put(thisPrimaryKey, dataContent);
         if (thisTable.isRoot && (thisTable.sCounter.get(thisPrimaryKey) == thisTable.numChild)) {
             Tuple4<String, String, Integer, Double> result = selectResult(tables, thisPrimaryKey);
+            joinResultState.put(thisPrimaryKey, result);
             System.out.println("!!!!!!!!!!!!Select Result!!!!!!!!!!");
             System.out.println(result);
-            // Perform Join
-            // System.out.println("Insert Tuple " + updateTuple.toString());
-            // Tuple4<String, String, Integer, Double> result =
-            // getSelectedTuple(allTableState, updateTuple.primaryKey);
-            // joinResultState.put(updateTuple.primaryKey, result);
 
         } else {
             System.out.println("=============== Parents =================");
             System.out.println(thisTable);
-            for (String parent : thisTable.parents) {
-                System.out.println(parent);
+            for (String parentName : thisTable.parents) {
+                MySQLTable parentTable = (MySQLTable) tables.get(parentName);
+                HashMap<Long, ArrayList<Long>> parentRelation = parentTable.indexTableAndTableChildInfo.get(tableName);
+
+                if (parentRelation != null) {
+                    ArrayList<Long> parentPKey = parentRelation.get(thisPrimaryKey);
+                    if (parentPKey != null) {
+                        for (Long tp : parentPKey) {
+                            // s(tp ) ← s(tp ) + 1
+                            int curCount = parentTable.sCounter.get(tp);
+                            parentTable.sCounter.put(tp, curCount + 1);
+
+                            // s(tp ) = |C(Rp )|
+                            if (parentTable.sCounter.get(tp) == Math.abs(parentTable.numChild)) {
+
+                                // 这里要加东西？
+                                // I(N(Rp )) ← I(N(Rp )) − (πPK(Rp ) tp → tp ) update non live tuple set
+                                if (parentTable.allTuples.containsKey(tp)) {
+                                    IDataContent parentContent = parentTable.allTuples.get(tp);
+                                    parentTable.indexNonLiveTuple.remove(tp);
+                                    // Insert-Update(tp, Rp, join_result tp )
+                                    insertUpdate(tables, parentTable.tableName, parentContent, joinResultState);
+                                }
+
+                            }
+                        }
+                    }
+                }
             }
         }
-
     }
 
     public Tuple4<String, String, Integer, Double> selectResult(Map<String, ITable> tables,

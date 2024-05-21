@@ -3,6 +3,7 @@ package tpc_query;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.api.common.functions.FilterFunction;
@@ -18,6 +19,7 @@ import org.apache.flink.util.Collector;
 import tpc_query.Query.*;
 import tpc_query.DataStream.DataOperation;
 import tpc_query.DataStream.TPCSource;
+import tpc_query.Database.ITable;
 import tpc_query.Database.MemoryTable;
 import tpc_query.Database.MySQLConnector;
 import tpc_query.Database.MySQLSink;
@@ -43,8 +45,10 @@ public class Main {
 
         // System.out.print("Creating JDBC sink");
         MySQLConnector.clearTPCHData();
-        dataSource.addSink(new MySQLSink()); // 要用
+        MySQLSink mySQLSink = new MySQLSink();
+        dataSource.addSink(mySQLSink); // 要用
 
         env.execute("TPC-H Query");
+
     }
 }

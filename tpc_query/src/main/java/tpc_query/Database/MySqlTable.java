@@ -13,6 +13,7 @@ import org.apache.flink.api.java.tuple.Tuple5;
 public class MySQLTable extends Table {
 
     private MySQLConnector connector;
+    public Hashtable<Long, IDataContent> allTuples;
 
     public MySQLTable() {
         this.connector = new MySQLConnector();
@@ -26,6 +27,7 @@ public class MySQLTable extends Table {
         this.parents = info.f2;
         this.numChild = info.f3;
         this.children = info.f4;
+        this.allTuples = new Hashtable<Long, IDataContent>();
         this.indexLiveTuple = new Hashtable<Long, IDataContent>();
         this.indexNonLiveTuple = new Hashtable<Long, IDataContent>();
         this.sCounter = new Hashtable<Long, Integer>();

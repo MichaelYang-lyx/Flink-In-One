@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import org.apache.flink.api.common.state.MapState;
+
 public abstract class DataContent implements IDataContent {
 
     @Override

@@ -5,15 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Orders extends DataContent {
-    private Long O_ORDERKEY;
-    private Long O_CUSTKEY;
-    private char O_ORDERSTATUS;
-    private double O_TOTALPRICE;
-    private String O_ORDERDATE;
-    private String O_ORDERPRIORITY;
-    private String O_CLERK;
-    private int O_SHIPPRIORITY;
-    private String O_COMMENT;
+    public Long O_ORDERKEY;
+    public Long O_CUSTKEY;
+    public char O_ORDERSTATUS;
+    public double O_TOTALPRICE;
+    public String O_ORDERDATE;
+    public String O_ORDERPRIORITY;
+    public String O_CLERK;
+    public int O_SHIPPRIORITY;
+    public String O_COMMENT;
 
     public Orders() {
     }
@@ -89,7 +89,7 @@ public class Orders extends DataContent {
                 + O_COMMENT + "]";
     }
 
-    public HashMap<String, Long> getForeignKeyQ5() {
+    public HashMap<String, Long> getForeignKeyQ() {
         HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
         foreignKeyMapping.put("CUSTOMER", O_CUSTKEY);
 
@@ -97,6 +97,13 @@ public class Orders extends DataContent {
     };
 
     public HashMap<String, Long> getForeignKeyQ7() {
+        HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
+        foreignKeyMapping.put("CUSTOMER", O_CUSTKEY);
+
+        return foreignKeyMapping;
+    };
+
+    public HashMap<String, Long> getForeignKeyQ5() {
         HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
         foreignKeyMapping.put("CUSTOMER", O_CUSTKEY);
 

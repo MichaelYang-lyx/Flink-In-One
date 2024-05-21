@@ -11,6 +11,10 @@ public class DataOperation {
     public String tableName;
     public IDataContent dataContent;
 
+    public String getKey() {
+        return tableName;
+    }
+
     public DataOperation(String operation, String tableName) {
         this.operation = operation;
         this.tableName = tableName;

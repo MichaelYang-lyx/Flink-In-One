@@ -21,6 +21,7 @@ tpc_query/DataStream/DataContent/DataContent.class
 tpc_query/DataStream/DataContent/Orders.class
 tpc_query/DataStream/DataOperation.class
 tpc_query/Update/Delete.class
+tpc_query/Query/Q7.class
 tpc_query/Update/IUpdate.class
 tpc_query/Database/Info.class
 tpc_query/Query/Q5.class

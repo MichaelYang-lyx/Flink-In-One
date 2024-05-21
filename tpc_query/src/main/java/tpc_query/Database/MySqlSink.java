@@ -1,5 +1,9 @@
 package tpc_query.Database;
 
+import org.apache.flink.api.common.state.MapState;
+import org.apache.flink.api.common.state.MapStateDescriptor;
+import org.apache.flink.api.common.typeinfo.Types;
+import org.apache.flink.api.java.tuple.Tuple4;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 
@@ -19,6 +23,8 @@ import tpc_query.Update.Insert;
 public class MySQLSink extends RichSinkFunction<DataOperation> {
     private Connection connection;
     private PreparedStatement preparedStatement;
+
+    private MapState<Long, Tuple4<String, String, Integer, Double>> joinResultState;
 
     @Override
     public void open(Configuration parameters) throws Exception {
@@ -64,13 +70,13 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
         Insert insert = new Insert();
         if (dataOperation.tableName.equals("NATION")) {
             dataOperation.switchTableName("NATION1");
-            insert.insert(tables, dataOperation);
+            insert.insert(tables, dataOperation, joinResultState);
             dataOperation.switchTableName("NATION2");
-            insert.insert(tables, dataOperation);
+            insert.insert(tables, dataOperation, joinResultState);
             dataOperation.switchTableName("NATION");
 
         } else {
-            insert.insert(tables, dataOperation);
+            insert.insert(tables, dataOperation, joinResultState);
         }
 
         try {

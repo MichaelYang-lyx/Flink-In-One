@@ -1,5 +1,6 @@
 package tpc_query.DataStream.DataContent;
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,7 @@ public class LineItem extends DataContent {
     public double L_TAX;
     public char L_RETURNFLAG;
     public char L_LINESTATUS;
-    public String L_SHIPDATE;
+    public Date L_SHIPDATE;
     public String L_COMMITDATE;
     public String L_RECEIPTDATE;
     public String L_SHIPINSTRUCT;
@@ -38,7 +39,7 @@ public class LineItem extends DataContent {
         this.L_TAX = Double.parseDouble(string[7]);
         this.L_RETURNFLAG = string[8].charAt(0);
         this.L_LINESTATUS = string[9].charAt(0);
-        this.L_SHIPDATE = string[10];
+        this.L_SHIPDATE = Date.valueOf(string[10]);
         this.L_COMMITDATE = string[11];
         this.L_RECEIPTDATE = string[12];
         this.L_SHIPINSTRUCT = string[13];
@@ -59,7 +60,8 @@ public class LineItem extends DataContent {
         return Arrays.asList(String.valueOf(L_ORDERKEY), String.valueOf(L_PARTKEY), String.valueOf(L_SUPPKEY),
                 String.valueOf(L_LINENUMBER), String.valueOf(L_QUANTITY), String.valueOf(L_EXTENDEDPRICE),
                 String.valueOf(L_DISCOUNT), String.valueOf(L_TAX), String.valueOf(L_RETURNFLAG),
-                String.valueOf(L_LINESTATUS), L_SHIPDATE, L_COMMITDATE, L_RECEIPTDATE, L_SHIPINSTRUCT, L_SHIPMODE,
+                String.valueOf(L_LINESTATUS), String.valueOf(L_SHIPDATE), L_COMMITDATE, L_RECEIPTDATE, L_SHIPINSTRUCT,
+                L_SHIPMODE,
                 L_COMMENT);
     }
 

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.api.common.functions.FilterFunction;
+import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.connector.jdbc.JdbcConnectionOptions;
 import org.apache.flink.connector.jdbc.JdbcSink;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -37,7 +38,7 @@ public class Main {
         // 创建一个 DataStream 来接收 TPCSource 的输出
         DataStream<DataOperation> dataSource = env.addSource(new TPCSource());
         dataSource = dataSource.filter((FilterFunction<DataOperation>) data -> query.filter(data));
-
+        dataSource = dataSource.keyBy((KeySelector<DataOperation, String>) DataOperation::getKey);
         // Create the JDBC sink outside the invoke method
 
         // System.out.print("Creating JDBC sink");

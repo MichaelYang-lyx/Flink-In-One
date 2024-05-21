@@ -24,8 +24,10 @@ public class Q7 implements IQuery, Serializable {
             return nation.N_NAME.equals("FRANCE") || nation.N_NAME.equals("GERMANY");
         } else if (data.getTableName().equals("LINEITEM")) {
             LineItem lineItem = (LineItem) data.getDataContent();
-            return lineItem.L_SHIPDATE.compareTo("1995-01-01") >= 0
-                    && lineItem.L_SHIPDATE.compareTo("1996-12-31") <= 0;
+            Date startDate = Date.valueOf("1995-01-01");
+            Date endDate = Date.valueOf("1996-12-31");
+            return lineItem.L_SHIPDATE.compareTo(startDate) >= 0
+                    && lineItem.L_SHIPDATE.compareTo(endDate) <= 0;
         } else if (data.getTableName().equals("REGION")) {
             return false;
         }

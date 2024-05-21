@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Customer extends DataContent {
-    private Long C_CUSTKEY;
-    private String C_NAME;
-    private String C_ADDRESS;
-    private Long C_NATIONKEY;
-    private String C_PHONE;
-    private double C_ACCTBAL;
-    private String C_MKTSEGMENT;
-    private String C_COMMENT;
+    public Long C_CUSTKEY;
+    public String C_NAME;
+    public String C_ADDRESS;
+    public Long C_NATIONKEY;
+    public String C_PHONE;
+    public double C_ACCTBAL;
+    public String C_MKTSEGMENT;
+    public String C_COMMENT;
 
     public Customer() {
     }

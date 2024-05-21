@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Nation extends DataContent {
-    private Long N_NATIONKEY;
-    private String N_NAME;
-    private Long N_REGIONKEY;
-    private String N_COMMENT;
+    public Long N_NATIONKEY;
+    public String N_NAME;
+    public Long N_REGIONKEY;
+    public String N_COMMENT;
 
     public Nation() {
     }
@@ -19,7 +19,7 @@ public class Nation extends DataContent {
         this.N_NAME = string[1];
         this.N_REGIONKEY = Long.parseLong(string[2]);
         this.N_COMMENT = string[3];
-        this.foreignKeyMapping = this.getForeignKey();
+        this.foreignKeyMapping = this.getForeignKeyQ7();
     }
 
     public String primaryKeyString() {
@@ -39,7 +39,12 @@ public class Nation extends DataContent {
                 + ", N_COMMENT=" + N_COMMENT + "]";
     }
 
-    public HashMap<String, Long> getForeignKey() {
+    public HashMap<String, Long> getForeignKeyQ7() {
+        HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
+        return foreignKeyMapping;
+    };
+
+    public HashMap<String, Long> getForeignKeyQ5() {
         HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
         foreignKeyMapping.put("REGION", N_REGIONKEY);
         return foreignKeyMapping;

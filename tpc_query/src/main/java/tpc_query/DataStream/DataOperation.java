@@ -23,6 +23,10 @@ public class DataOperation {
         this.dataContent = dataContent;
     }
 
+    public void switchTableName(String newName) {
+        this.tableName = newName;
+    }
+
     public String getOperation() {
         return operation;
     }

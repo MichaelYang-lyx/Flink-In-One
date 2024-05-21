@@ -29,7 +29,7 @@ public class Orders extends DataContent {
         this.O_CLERK = string[6];
         this.O_SHIPPRIORITY = Integer.parseInt(string[7]);
         this.O_COMMENT = string[8];
-        this.foreignKeyMapping = this.getForeignKey();
+        this.foreignKeyMapping = this.getForeignKeyQ7();
     }
 
     public Long primaryKeyLong() {
@@ -89,7 +89,14 @@ public class Orders extends DataContent {
                 + O_COMMENT + "]";
     }
 
-    public HashMap<String, Long> getForeignKey() {
+    public HashMap<String, Long> getForeignKeyQ5() {
+        HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
+        foreignKeyMapping.put("CUSTOMER", O_CUSTKEY);
+
+        return foreignKeyMapping;
+    };
+
+    public HashMap<String, Long> getForeignKeyQ7() {
         HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
         foreignKeyMapping.put("CUSTOMER", O_CUSTKEY);
 

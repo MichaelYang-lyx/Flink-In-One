@@ -17,7 +17,7 @@ public class Region extends DataContent {
         this.R_REGIONKEY = Long.parseLong(string[0]);
         this.R_NAME = string[1];
         this.R_COMMENT = string[2];
-        this.foreignKeyMapping = this.getForeignKey();
+        this.foreignKeyMapping = this.getForeignKeyQ7();
     }
 
     public String primaryKeyString() {
@@ -48,7 +48,12 @@ public class Region extends DataContent {
         return "Region [R_REGIONKEY=" + R_REGIONKEY + ", R_NAME=" + R_NAME + ", R_COMMENT=" + R_COMMENT + "]";
     }
 
-    public HashMap<String, Long> getForeignKey() {
+    public HashMap<String, Long> getForeignKeyQ7() {
+        HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
+        return foreignKeyMapping;
+    };
+
+    public HashMap<String, Long> getForeignKeyQ5() {
         HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
         return foreignKeyMapping;
     };

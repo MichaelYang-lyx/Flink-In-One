@@ -6,22 +6,22 @@ import java.util.List;
 import java.util.Set;
 
 public class LineItem extends DataContent {
-    private Long L_ORDERKEY;
-    private int L_PARTKEY;
-    private Long L_SUPPKEY;
-    private Long L_LINENUMBER;
-    private double L_QUANTITY;
-    private double L_EXTENDEDPRICE;
-    private double L_DISCOUNT;
-    private double L_TAX;
-    private char L_RETURNFLAG;
-    private char L_LINESTATUS;
-    private String L_SHIPDATE;
-    private String L_COMMITDATE;
-    private String L_RECEIPTDATE;
-    private String L_SHIPINSTRUCT;
-    private String L_SHIPMODE;
-    private String L_COMMENT;
+    public Long L_ORDERKEY;
+    public int L_PARTKEY;
+    public Long L_SUPPKEY;
+    public Long L_LINENUMBER;
+    public double L_QUANTITY;
+    public double L_EXTENDEDPRICE;
+    public double L_DISCOUNT;
+    public double L_TAX;
+    public char L_RETURNFLAG;
+    public char L_LINESTATUS;
+    public String L_SHIPDATE;
+    public String L_COMMITDATE;
+    public String L_RECEIPTDATE;
+    public String L_SHIPINSTRUCT;
+    public String L_SHIPMODE;
+    public String L_COMMENT;
 
     public LineItem() {
     }
@@ -44,7 +44,7 @@ public class LineItem extends DataContent {
         this.L_SHIPINSTRUCT = string[13];
         this.L_SHIPMODE = string[14];
         this.L_COMMENT = string[15];
-        this.foreignKeyMapping = this.getForeignKey();
+        this.foreignKeyMapping = this.getForeignKeyQ7();
     }
 
     public Long primaryKeyLong() {
@@ -72,7 +72,16 @@ public class LineItem extends DataContent {
                 + L_SHIPMODE + ", L_COMMENT=" + L_COMMENT + "]";
     }
 
-    public HashMap<String, Long> getForeignKey() {
+    public HashMap<String, Long> getForeignKeyQ7() {
+
+        HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
+        foreignKeyMapping.put("SUPPLIER", L_SUPPKEY);
+        foreignKeyMapping.put("ORDERS", L_ORDERKEY);
+
+        return foreignKeyMapping;
+    };
+
+    public HashMap<String, Long> getForeignKeyQ5() {
 
         HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
         foreignKeyMapping.put("SUPPLIER", L_SUPPKEY);

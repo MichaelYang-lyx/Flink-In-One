@@ -13,7 +13,7 @@ import java.util.Map;
 
 import tpc_query.DataStream.DataOperation;
 import tpc_query.Query.IQuery;
-import tpc_query.Query.Q5;
+import tpc_query.Query.Q7;
 import tpc_query.Update.Insert;
 
 public class MySQLSink extends RichSinkFunction<DataOperation> {
@@ -57,12 +57,21 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
     public void invoke(DataOperation dataOperation, Context context) throws Exception {
         // below for test
         TableController tableController = new TableController("MySQL");
-        IQuery query = new Q5();
+        IQuery query = new Q7();
         tableController.setupTables(query);
         Map<String, ITable> tables = tableController.tables;
 
         Insert insert = new Insert();
-        insert.insert(tables, dataOperation);
+        if (dataOperation.tableName.equals("NATION")) {
+            dataOperation.switchTableName("NATION1");
+            insert.insert(tables, dataOperation);
+            dataOperation.switchTableName("NATION2");
+            insert.insert(tables, dataOperation);
+            dataOperation.switchTableName("NATION");
+
+        } else {
+            insert.insert(tables, dataOperation);
+        }
 
         try {
             String sql = generateSql(dataOperation);

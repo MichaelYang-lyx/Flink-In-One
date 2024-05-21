@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Supplier extends DataContent {
-    private Long S_SUPPKEY;
-    private String S_NAME;
-    private String S_ADDRESS;
-    private Long S_NATIONKEY;
-    private String S_PHONE;
-    private double S_ACCTBAL;
-    private String S_COMMENT;
+    public Long S_SUPPKEY;
+    public String S_NAME;
+    public String S_ADDRESS;
+    public Long S_NATIONKEY;
+    public String S_PHONE;
+    public double S_ACCTBAL;
+    public String S_COMMENT;
 
     public Supplier() {
     }
@@ -24,7 +24,7 @@ public class Supplier extends DataContent {
         this.S_PHONE = string[4];
         this.S_ACCTBAL = Double.parseDouble(string[5]);
         this.S_COMMENT = string[6];
-        this.foreignKeyMapping = this.getForeignKey();
+        this.foreignKeyMapping = this.getForeignKeyQ7();
     }
 
     public Long primaryKeyLong() {
@@ -52,9 +52,16 @@ public class Supplier extends DataContent {
                 + S_NATIONKEY + ", S_PHONE=" + S_PHONE + ", S_ACCTBAL=" + S_ACCTBAL + ", S_COMMENT=" + S_COMMENT + "}";
     }
 
-    public HashMap<String, Long> getForeignKey() {
+    public HashMap<String, Long> getForeignKeyQ5() {
         HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
         foreignKeyMapping.put("NATION", S_NATIONKEY);
+
+        return foreignKeyMapping;
+    }
+
+    public HashMap<String, Long> getForeignKeyQ7() {
+        HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
+        foreignKeyMapping.put("NATION1", S_NATIONKEY);
 
         return foreignKeyMapping;
     }

@@ -27,7 +27,7 @@ public class Customer extends DataContent {
         this.C_ACCTBAL = Double.parseDouble(string[5]);
         this.C_MKTSEGMENT = string[6];
         this.C_COMMENT = string[7];
-        this.foreignKeyMapping = this.getForeignKey();
+        this.foreignKeyMapping = this.getForeignKeyQ7();
 
     }
 
@@ -83,9 +83,15 @@ public class Customer extends DataContent {
                 + ", C_COMMENT=" + C_COMMENT + "}";
     }
 
-    public HashMap<String, Long> getForeignKey() {
+    public HashMap<String, Long> getForeignKeyQ5() {
         HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
         foreignKeyMapping.put("SUPPLIER", C_NATIONKEY);
+        return foreignKeyMapping;
+    }
+
+    public HashMap<String, Long> getForeignKeyQ7() {
+        HashMap<String, Long> foreignKeyMapping = new HashMap<String, Long>();
+        foreignKeyMapping.put("NATION2", C_NATIONKEY);
         return foreignKeyMapping;
     }
 }

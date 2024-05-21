@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.UUID;
 
 import tpc_query.DataStream.DataOperation;
+import tpc_query.DataStream.DataContent.LineItem;
+import tpc_query.DataStream.DataContent.Supplier;
 import tpc_query.Database.ITable;
 import tpc_query.Database.MemoryTable;
 import tpc_query.Database.MySQLTable;
@@ -19,6 +21,8 @@ import tpc_query.Query.IQuery;
 import tpc_query.Query.Q5;
 
 import org.apache.flink.api.common.state.MapState;
+import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.api.java.tuple.Tuple4;
 import org.apache.flink.util.Collector;
 
 public class Insert extends Update {
@@ -49,6 +53,10 @@ public class Insert extends Update {
     public void insert(Map<String, ITable> tables, DataOperation dataOperation) {
         String tableName = dataOperation.getTableName();
         MySQLTable thisTable = (MySQLTable) tables.get(tableName);
+        for (String childName : thisTable.children) {
+            System.out.println("childName");
+            System.out.println(childName);
+        }
         Long thisPrimaryKey = dataOperation.dataContent.primaryKeyLong();
         System.out.println("------ primarykey: " + thisPrimaryKey);
         if (!thisTable.isLeaf) {
@@ -81,6 +89,7 @@ public class Insert extends Update {
 
                 MySQLTable childTable = (MySQLTable) tables.get(childName);
                 // if πPK(Rc)t ∈ I(Rc) then s(t) ← s(t) + 1
+
                 if (childTable.indexLiveTuple.containsKey(tupleForeignKey)) {
                     int curCount = thisTable.sCounter.get(thisPrimaryKey);
                     thisTable.sCounter.put(thisPrimaryKey, curCount + 1);
@@ -93,6 +102,7 @@ public class Insert extends Update {
 
         }
         // if R is a leaf or s(t) = |C(R)| then
+
         if (thisTable.isLeaf || (thisTable.sCounter.get(thisPrimaryKey) == Math.abs(thisTable.numChild))) {
             insertUpdate(tables, dataOperation);
             // insertUpdateAlgorithm(tableState, updateTuple, collector);
@@ -108,7 +118,10 @@ public class Insert extends Update {
         String tableName = dataOperation.getTableName();
         MySQLTable thisTable = (MySQLTable) tables.get(tableName);
         Long thisPrimaryKey = dataOperation.dataContent.primaryKeyLong();
+
+        thisTable.indexLiveTuple.put(thisPrimaryKey, dataOperation.dataContent);
         if (thisTable.isRoot && (thisTable.sCounter.get(thisPrimaryKey) == thisTable.numChild)) {
+
             // Perform Join
             // System.out.println("Insert Tuple " + updateTuple.toString());
             // Tuple4<String, String, Integer, Double> result =
@@ -122,6 +135,52 @@ public class Insert extends Update {
                 System.out.println(parent);
             }
         }
+
+    }
+
+    public Tuple4<String, String, Integer, Double> getSelectedTuple(Map<String, ITable> tables,
+            Long lineitemPKey) throws Exception {
+        MySQLTable lineItem_Table = (MySQLTable) tables.get("LINEITEM");
+        LineItem lineItem = (LineItem) lineItem_Table.indexLiveTuple.get(lineitemPKey);
+        Long l_orderkey = lineItem.L_ORDERKEY;
+        Long l_suppkey = lineItem.L_SUPPKEY;
+
+        MySQLTable supplier_Table = (MySQLTable) tables.get("SUPPLIER");
+        Supplier supplier = (Supplier) supplier_Table.indexLiveTuple.get(l_suppkey);
+        Long s_nationkey = supplier.S_NATIONKEY;
+        Long s_suppkey = supplier.S_SUPPKEY;
+
+        MySQLTable customer_Table = (MySQLTable) tables.get("CUSTOMER");
+        Long c_custkey = customer_Table.indexLiveTuple.get(l_orderkey).primaryKeyLong();
+
+        /*
+         * l_orderkey = (MySQLTable)
+         * tables.get("Lineitem").indexLiveTuple.get(lineitemPKey);
+         * 
+         * int l_shipYear = calendar.get(Calendar.YEAR);
+         * Double l_extendedPrice = allTableState.get("Lineitem").indexLiveTuple
+         * .get(lineitemPKey).lineitemTuple.l_extendedPrice;
+         * Double l_discount =
+         * allTableState.get("Lineitem").indexLiveTuple.get(lineitemPKey).lineitemTuple.
+         * l_discount;
+         * Long s_nationkey =
+         * allTableState.get("Supplier").indexLiveTuple.get(l_suppkey).supplierTuple.
+         * s_nationkey;
+         * String n_name1 =
+         * allTableState.get("Nation1").indexLiveTuple.get(s_nationkey).nationTuple.
+         * n_name;
+         * Long o_custkey =
+         * allTableState.get("Orders").indexLiveTuple.get(l_orderkey).ordersTuple.
+         * o_custkey;
+         * Long c_nationkey =
+         * allTableState.get("Customer").indexLiveTuple.get(o_custkey).customerTuple.
+         * c_nationkey;
+         * String n_name2 =
+         * allTableState.get("Nation2").indexLiveTuple.get(c_nationkey).nationTuple.
+         * n_name;
+         * Double volumn = l_extendedPrice * (1 - l_discount);
+         */
+        return null;
     }
     /*
      * public void insertAlgorithm(MapState<String, TableLogger> allTableState,

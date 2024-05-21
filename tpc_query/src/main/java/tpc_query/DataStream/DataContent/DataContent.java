@@ -13,7 +13,9 @@ public abstract class DataContent implements IDataContent {
     @Override
     public abstract String primaryKeyString();
 
-    public abstract HashMap<String, Long> getForeignKey();
+    public abstract HashMap<String, Long> getForeignKeyQ7();
+
+    public abstract HashMap<String, Long> getForeignKeyQ5();
 
     public HashMap<String, Long> foreignKeyMapping;
 

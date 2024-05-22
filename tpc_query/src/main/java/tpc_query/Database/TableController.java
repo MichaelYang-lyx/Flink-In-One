@@ -41,7 +41,7 @@ public class TableController {
             for (Map.Entry<String, Tuple5<Boolean, Boolean, List<String>, Integer, List<String>>> entry : tableInfo
                     .entrySet()) {
                 String tableName = entry.getKey();
-                ITable table = new MySQLTable(tableName, entry.getValue());
+                ITable table = new MyTable(tableName, entry.getValue());
                 this.tables.put(tableName, table);
             }
             /*

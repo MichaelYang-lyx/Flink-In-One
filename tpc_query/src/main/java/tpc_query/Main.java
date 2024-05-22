@@ -23,7 +23,7 @@ import tpc_query.Database.ITable;
 import tpc_query.Database.MemoryTable;
 import tpc_query.Database.MySQLConnector;
 import tpc_query.Database.MySQLSink;
-import tpc_query.Database.MySQLTable;
+import tpc_query.Database.MyTable;
 import tpc_query.Database.TableController;
 
 import tpc_query.Update.Insert;

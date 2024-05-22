@@ -21,7 +21,7 @@ import tpc_query.DataStream.DataContent.Orders;
 import tpc_query.DataStream.DataContent.Region;
 import tpc_query.DataStream.DataContent.Supplier;
 import tpc_query.Database.ITable;
-import tpc_query.Database.MySQLTable;
+import tpc_query.Database.MyTable;
 
 public class Q7 implements IQuery, Serializable {
 
@@ -61,12 +61,12 @@ public class Q7 implements IQuery, Serializable {
     public static List<Tuple4<String, String, Integer, Double>> directSelect1(Map<String, ITable> tables)
             throws Exception {
 
-        MySQLTable lineItemTable = (MySQLTable) tables.get("LINEITEM");
-        MySQLTable supplierTable = (MySQLTable) tables.get("SUPPLIER");
-        MySQLTable customerTable = (MySQLTable) tables.get("CUSTOMER");
-        MySQLTable ordersTable = (MySQLTable) tables.get("ORDERS");
-        MySQLTable nation1Table = (MySQLTable) tables.get("NATION1");
-        MySQLTable nation2Table = (MySQLTable) tables.get("NATION2");
+        MyTable lineItemTable = (MyTable) tables.get("LINEITEM");
+        MyTable supplierTable = (MyTable) tables.get("SUPPLIER");
+        MyTable customerTable = (MyTable) tables.get("CUSTOMER");
+        MyTable ordersTable = (MyTable) tables.get("ORDERS");
+        MyTable nation1Table = (MyTable) tables.get("NATION1");
+        MyTable nation2Table = (MyTable) tables.get("NATION2");
 
         List<Tuple4<String, String, Integer, Double>> result = new ArrayList<>();
 
@@ -118,12 +118,12 @@ public class Q7 implements IQuery, Serializable {
     public static Tuple4<String, String, Integer, Double> selectResult(Map<String, ITable> tables,
             Long lineitemPKey) throws Exception {
         // Get Table
-        MySQLTable lineItem_Table = (MySQLTable) tables.get("LINEITEM");
-        MySQLTable supplier_Table = (MySQLTable) tables.get("SUPPLIER");
-        MySQLTable customer_Table = (MySQLTable) tables.get("CUSTOMER");
-        MySQLTable orders_Table = (MySQLTable) tables.get("ORDERS");
-        MySQLTable nation1_Table = (MySQLTable) tables.get("NATION1");
-        MySQLTable nation2_Table = (MySQLTable) tables.get("NATION2");
+        MyTable lineItem_Table = (MyTable) tables.get("LINEITEM");
+        MyTable supplier_Table = (MyTable) tables.get("SUPPLIER");
+        MyTable customer_Table = (MyTable) tables.get("CUSTOMER");
+        MyTable orders_Table = (MyTable) tables.get("ORDERS");
+        MyTable nation1_Table = (MyTable) tables.get("NATION1");
+        MyTable nation2_Table = (MyTable) tables.get("NATION2");
         // Get Data
         LineItem lineItem = (LineItem) lineItem_Table.indexLiveTuple.get(lineitemPKey);
         Long l_orderkey = lineItem.L_ORDERKEY;

@@ -10,16 +10,15 @@ import java.util.List;
 
 import org.apache.flink.api.java.tuple.Tuple5;
 
-public class MySQLTable extends Table {
+public class MyTable extends Table {
 
-    private MySQLConnector connector;
     public Hashtable<Long, IDataContent> allTuples;
 
-    public MySQLTable() {
-        this.connector = new MySQLConnector();
+    public MyTable() {
+
     }
 
-    public MySQLTable(String tableName, Tuple5<Boolean, Boolean, List<String>, Integer, List<String>> info) {
+    public MyTable(String tableName, Tuple5<Boolean, Boolean, List<String>, Integer, List<String>> info) {
 
         this.tableName = tableName;
         this.isRoot = info.f0;
@@ -35,7 +34,7 @@ public class MySQLTable extends Table {
 
     }
 
-    public MySQLTable(String tableName) {
+    public MyTable(String tableName) {
         this.tableName = tableName;
         // Initialize database connection and other setup
     }

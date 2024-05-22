@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 import tpc_query.DataStream.DataContent.IDataContent;
 import tpc_query.Database.ITable;
-import tpc_query.Database.MySQLTable;
+import tpc_query.Database.MyTable;
 
 import tpc_query.Query.Q7;
 
@@ -39,123 +39,115 @@ public class Insert extends Update {
 
     }
 
+    /**
+     * Insert a tuple into the tables.
+     * 
+     * @param tables          The map of tables.
+     * @param tableName       The name of the table.
+     * @param dataContent     The data content of the tuple.
+     * @param joinResultState The map state for join results.
+     * @throws Exception If an error occurs during insertion.
+     */
     public static void insert(Map<String, ITable> tables, String tableName, IDataContent dataContent,
             MapState<Long, Tuple4<String, String, Integer, Double>> joinResultState) throws Exception {
 
-        MySQLTable thisTable = (MySQLTable) tables.get(tableName);
+        MyTable thisTable = (MyTable) tables.get(tableName);
         Long thisPrimaryKey = dataContent.primaryKeyLong();
+        // Insert the new tuple into the table
         thisTable.allTuples.put(thisPrimaryKey, dataContent);
+
+        // If the table is not a leaf node
         if (!thisTable.isLeaf) {
             thisTable.sCounter.put(thisPrimaryKey, 0);
+
+            // Iterate over child tables
             for (String childName : thisTable.children) {
-                // I(R, Rc ) ← I(R, Rc ) + (πPK(Rc )t → πPK(R),PK(Rc )t)
+
                 thisTable.indexTableAndTableChildInfo.computeIfAbsent(childName,
                         k -> new HashMap<Long, ArrayList<Long>>());
                 HashMap<Long, ArrayList<Long>> childRelation = thisTable.indexTableAndTableChildInfo.get(childName);
-                // 这个tuple在child table中的外键
                 Long tupleForeignKey = dataContent.getforeignKeyMapping().get(childName);
-
-                // initialize an arraylist if not exist the key
-                // lst: 这个child 外键->这个tuble的主键list
                 ArrayList<Long> lst = childRelation.get(tupleForeignKey);
-                if (lst != null) {
 
+                // Ensure there is no duplicate primary key
+                if (lst != null) {
                     if (lst.contains(thisPrimaryKey)) {
                         try {
-                            throw new Exception("Should not have same primary key. Assign Lineitem Unique primary Key");
+                            throw new Exception(
+                                    "Should not have the same primary key. Assign Lineitem Unique primary Key");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                     lst.add(thisPrimaryKey);
-
                 } else {
                     childRelation.put(tupleForeignKey, new ArrayList<>(Arrays.asList(thisPrimaryKey)));
                 }
 
-                MySQLTable childTable = (MySQLTable) tables.get(childName);
-                // if πPK(Rc)t ∈ I(Rc) then s(t) ← s(t) + 1
-
+                MyTable childTable = (MyTable) tables.get(childName);
+                // If πPK(Rc)t ∈ I(Rc) then s(t) ← s(t) + 1
                 if (childTable.indexLiveTuple.containsKey(tupleForeignKey)) {
                     int curCount = thisTable.sCounter.get(thisPrimaryKey);
                     thisTable.sCounter.put(thisPrimaryKey, curCount + 1);
                 }
-
-                // 这后面好像得加点东西
-
             }
-
         }
-        // if R is a leaf or s(t) = |C(R)| then
 
+        // If R is a leaf or s(t) = |C(R)| then insertUpdate
         if (thisTable.isLeaf || (thisTable.sCounter.get(thisPrimaryKey) == Math.abs(thisTable.numChild))) {
             insertUpdate(tables, tableName, dataContent, joinResultState);
-            // insertUpdateAlgorithm(tableState, updateTuple, collector);
-        }
-
-        // else I(N(R)) ← I(N(R)) + (πPK(R)t → t) put this tuple to non live tuple set.
-        else {
+        } else {
+            // Otherwise, add to non-live tuples
             thisTable.indexNonLiveTuple.put(thisPrimaryKey, dataContent);
         }
     };
 
+    /**
+     * Perform insert update operation on the tables.
+     * 
+     * @param tables          The map of tables.
+     * @param tableName       The name of the table.
+     * @param dataContent     The data content of the tuple.
+     * @param joinResultState The map state for join results.
+     * @throws Exception If an error occurs during insert update.
+     */
     public static void insertUpdate(Map<String, ITable> tables, String tableName, IDataContent dataContent,
             MapState<Long, Tuple4<String, String, Integer, Double>> joinResultState) throws Exception {
 
-        MySQLTable thisTable = (MySQLTable) tables.get(tableName);
+        MyTable thisTable = (MyTable) tables.get(tableName);
         Long thisPrimaryKey = dataContent.primaryKeyLong();
 
+        // Mark the tuple as live by adding it to the live tuple index
         thisTable.indexLiveTuple.put(thisPrimaryKey, dataContent);
+
+        // If this table is the root and s(t) = |C(R)|, compute the query result
         if (thisTable.isRoot && (thisTable.sCounter.get(thisPrimaryKey) == thisTable.numChild)) {
-            Tuple4<String, String, Integer, Double> result = Q7.selectResult(tables, thisPrimaryKey);// return null if
+            Tuple4<String, String, Integer, Double> result = Q7.selectResult(tables, thisPrimaryKey);
             if (result != null) {
-                joinResultState.put(thisPrimaryKey, result);
-            } // cannot pass the
-            // filter
-            // System.out.println(thisPrimaryKey + " ******** " + result);
-
-            // ;
-            // }
-
-            // System.out.println("==-------- joinResult) ---------==");
-            // int count = 0;
-            // Iterable<Map.Entry<Long, Tuple4<String, String, Integer, Double>>> entries =
-            // joinResultState.entries();
-            // for (Map.Entry<Long, Tuple4<String, String, Integer, Double>> entry :
-            // entries) {
-            // count += 1;
-
-            // }
-            // System.out.println(tableName + " join result count: " + count);
-            // System.out.println("!!!!!!!!!!!!Select Result!!!!!!!!!!");
-            // System.out.println(result);
-
+                joinResultState.put(thisPrimaryKey, result); // Store the result if it's not null
+            }
         } else {
-
+            // Iterate over parent tables
             for (String parentName : thisTable.parents) {
-                MySQLTable parentTable = (MySQLTable) tables.get(parentName);
+                MyTable parentTable = (MyTable) tables.get(parentName);
                 HashMap<Long, ArrayList<Long>> parentRelation = parentTable.indexTableAndTableChildInfo.get(tableName);
 
                 if (parentRelation != null) {
                     ArrayList<Long> parentPKey = parentRelation.get(thisPrimaryKey);
                     if (parentPKey != null) {
                         for (Long tp : parentPKey) {
-                            // s(tp ) ← s(tp ) + 1
                             int curCount = parentTable.sCounter.get(tp);
                             parentTable.sCounter.put(tp, curCount + 1);
 
-                            // s(tp ) = |C(Rp )|
+                            // If s(tp) = |C(Rp)|, mark the parent tuple as live
                             if (parentTable.sCounter.get(tp) == Math.abs(parentTable.numChild)) {
-
-                                // 这里要加东西？
-                                // I(N(Rp )) ← I(N(Rp )) − (πPK(Rp ) tp → tp ) update non live tuple set
                                 if (parentTable.allTuples.containsKey(tp)) {
                                     IDataContent parentContent = parentTable.allTuples.get(tp);
                                     parentTable.indexNonLiveTuple.remove(tp);
-                                    // Insert-Update(tp, Rp, join_result tp )
+
+                                    // Recursively update the parent tuple
                                     insertUpdate(tables, parentTable.tableName, parentContent, joinResultState);
                                 }
-
                             }
                         }
                     }

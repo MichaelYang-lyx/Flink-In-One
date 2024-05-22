@@ -88,7 +88,7 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
 
         try {
             for (Map.Entry<String, ITable> entry : tables.entrySet()) {
-                MySQLTable table = (MySQLTable) entry.getValue();
+                MyTable table = (MyTable) entry.getValue();
                 PrintWriter writer = new PrintWriter(new File("output/tpc_query/" + entry.getKey() + ".txt"));
                 writer.println("-------- Table Name: " + entry.getKey() + "---------");
                 for (Map.Entry<Long, IDataContent> tupleEntry : table.allTuples.entrySet()) {
@@ -166,14 +166,12 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
                 }
             }
 
-            // System.out.println("** " + dataOperation.operation + " " +
-            // preparedStatement);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
 
             System.err.println("Error while writing to database: " + e.getMessage());
         }
-        // 这里还需要添加维护relationship的操作
+
         if (dataOperation.operation.equals("+")) {
 
             if (dataOperation.tableName.equals("NATION")) {
@@ -186,23 +184,22 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
             } else {
                 Insert.insert(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
             }
+        } else {
+            if (dataOperation.tableName.equals("NATION")) {
+                dataOperation.switchTableName("NATION1");
+                Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent,
+                        joinResultState);
+                dataOperation.switchTableName("NATION2");
+                Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent,
+                        joinResultState);
+                dataOperation.switchTableName("NATION");
+
+            } else {
+                Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent,
+                        joinResultState);
+            }
+
         }
-        // else {
-        // if (dataOperation.tableName.equals("NATION")) {
-        // dataOperation.switchTableName("NATION1");
-        // Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent,
-        // joinResultState);
-        // dataOperation.switchTableName("NATION2");
-        // Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent,
-        // joinResultState);
-        // dataOperation.switchTableName("NATION");
-
-        // } else {
-        // Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent,
-        // joinResultState);
-        // }
-
-        // }
 
     }
 }

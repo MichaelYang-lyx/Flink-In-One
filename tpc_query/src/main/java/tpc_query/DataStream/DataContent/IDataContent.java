@@ -9,7 +9,7 @@ public interface IDataContent {
 
     public String toString();
 
-    public String primaryKeyString();
+    public String primaryKeySQL();
 
     public Long primaryKeyLong();
 

@@ -82,8 +82,6 @@ public class Q7 implements IQuery, Serializable {
         // No need for filtering as filtering has been finished in datasource sink
         for (IDataContent lineItemContent : lineItems.values()) {
             LineItem lineItem = (LineItem) lineItemContent;
-            System.out.println("only here");
-            System.out.println(lineItemContent);
             Supplier supplier = (Supplier) suppliers.get((long) lineItem.L_SUPPKEY);
             if (supplier == null || !nations1.containsKey(supplier.S_NATIONKEY))
                 continue;
@@ -101,7 +99,6 @@ public class Q7 implements IQuery, Serializable {
 
             String suppNation = nation1.N_NAME;
             String custNation = nation2.N_NAME;
-            System.out.println("have been here");
             if (!((suppNation.equals("FRANCE") && custNation.equals("GERMANY"))
                     || (suppNation.equals("GERMANY") && custNation.equals("FRANCE")))) {
                 continue;

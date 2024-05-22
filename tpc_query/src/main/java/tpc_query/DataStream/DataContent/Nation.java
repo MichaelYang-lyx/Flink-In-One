@@ -22,8 +22,8 @@ public class Nation extends DataContent {
         this.foreignKeyMapping = this.getForeignKeyQ7();
     }
 
-    public String primaryKeyString() {
-        return String.valueOf(N_NATIONKEY);
+    public String primaryKeySQL() {
+        return "n_nationkey = " + String.valueOf(N_NATIONKEY);
     }
 
     public Long primaryKeyLong() {

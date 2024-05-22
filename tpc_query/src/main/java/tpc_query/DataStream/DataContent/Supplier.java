@@ -42,8 +42,8 @@ public class Supplier extends DataContent {
                 S_COMMENT);
     }
 
-    public String primaryKeyString() {
-        return String.valueOf(S_SUPPKEY);
+    public String primaryKeySQL() {
+        return "s_suppkey = " + String.valueOf(S_SUPPKEY);
     }
 
     public String toString() {

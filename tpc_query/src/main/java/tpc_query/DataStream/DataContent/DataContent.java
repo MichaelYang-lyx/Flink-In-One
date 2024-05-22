@@ -13,7 +13,7 @@ public abstract class DataContent implements IDataContent {
     public abstract String toString();
 
     @Override
-    public abstract String primaryKeyString();
+    public abstract String primaryKeySQL();
 
     public abstract HashMap<String, Long> getForeignKeyQ7();
 

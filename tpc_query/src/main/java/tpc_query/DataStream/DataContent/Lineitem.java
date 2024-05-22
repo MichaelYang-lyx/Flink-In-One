@@ -49,11 +49,13 @@ public class LineItem extends DataContent {
     }
 
     public Long primaryKeyLong() {
-        return L_LINENUMBER;
+        Long a = L_ORDERKEY;
+        Long b = L_LINENUMBER;
+        return a >= b ? a * a + a + b : a + b * b;
     }
 
-    public String primaryKeyString() {
-        return L_ORDERKEY + "," + L_LINENUMBER;
+    public String primaryKeySQL() {
+        return "l_orderkey = " + String.valueOf(L_ORDERKEY) + " AND l_linenumber = " + String.valueOf(L_LINENUMBER);
     }
 
     public List<String> toList() {

@@ -35,8 +35,8 @@ public class Customer extends DataContent {
         return C_CUSTKEY;
     }
 
-    public String primaryKeyString() {
-        return String.valueOf(C_CUSTKEY);
+    public String primaryKeySQL() {
+        return "c_custkey = " + String.valueOf(C_CUSTKEY);
     }
 
     public Long getC_CUSTKEY() {

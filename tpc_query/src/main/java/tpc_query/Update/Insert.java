@@ -2,37 +2,18 @@ package tpc_query.Update;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 
-import tpc_query.DataStream.DataOperation;
-import tpc_query.DataStream.DataContent.Customer;
-import tpc_query.DataStream.DataContent.DataContent;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import tpc_query.DataStream.DataContent.IDataContent;
-import tpc_query.DataStream.DataContent.LineItem;
-import tpc_query.DataStream.DataContent.Nation;
-import tpc_query.DataStream.DataContent.Orders;
-import tpc_query.DataStream.DataContent.Supplier;
 import tpc_query.Database.ITable;
-import tpc_query.Database.MemoryTable;
 import tpc_query.Database.MySQLTable;
-import tpc_query.Database.Table;
-import tpc_query.Database.TableController;
-import tpc_query.Query.IQuery;
-import tpc_query.Query.Q5;
+
 import tpc_query.Query.Q7;
 
 import org.apache.flink.api.common.state.MapState;
-import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple4;
-import org.apache.flink.util.Collector;
-
-import com.ibm.icu.util.Calendar;
 
 public class Insert extends Update {
     public void run() {
@@ -168,10 +149,5 @@ public class Insert extends Update {
             }
         }
     }
-
-    public void insertUpdate(Table table, DataOperation dataOperation) {
-
-        return;
-    };
 
 }

@@ -20,8 +20,8 @@ public class Region extends DataContent {
         this.foreignKeyMapping = this.getForeignKeyQ7();
     }
 
-    public String primaryKeyString() {
-        return String.valueOf(R_REGIONKEY);
+    public String primaryKeySQL() {
+        return "r_regionkey = " + String.valueOf(R_REGIONKEY);
     }
 
     public Long primaryKeyLong() {

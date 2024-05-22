@@ -36,8 +36,8 @@ public class Orders extends DataContent {
         return O_ORDERKEY;
     }
 
-    public String primaryKeyString() {
-        return String.valueOf(O_ORDERKEY);
+    public String primaryKeySQL() {
+        return "o_orderkey = " + String.valueOf(O_ORDERKEY);
     }
 
     public Long getO_ORDERKEY() {

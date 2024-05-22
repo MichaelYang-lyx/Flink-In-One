@@ -12,14 +12,20 @@ import random
 # reproducibility
 random.seed(0)
 
-# file paths
-# 5 tables are needed for query 7
-# lineitem, orders, supplier, customer, nation
+# query 5
+'''
 dataset_files = ["lineitem.tbl", "orders.tbl",
                  "supplier.tbl", "customer.tbl", "nation.tbl","region.tbl"]
 
 # filtered 
 FILTERED_TBL_SET = set(["region.tbl", "orders.tbl"])
+'''
+# query 7
+dataset_files = ["lineitem.tbl", "orders.tbl",
+                 "supplier.tbl", "customer.tbl", "nation.tbl"]
+
+# filtered 
+FILTERED_TBL_SET = set(["nation.tbl", "supplier.tbl", "customer.tbl"])
 
 # target dump path
 csv_file_path = "source_data.csv"

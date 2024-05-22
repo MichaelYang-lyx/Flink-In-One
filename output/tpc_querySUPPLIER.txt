@@ -1,0 +1,101 @@
+-------- Table Name: SUPPLIER---------
+Primary Key: 50
+Data Content: Supplier { S_SUPPKEY=50, S_NAME=Supplier#000000050, S_ADDRESS=rGobqSMMYz0ErrPhCGS, S_NATIONKEY=9, S_PHONE=19-561-560-7437, S_ACCTBAL=4515.87, S_COMMENT=warhorses. ironic. regular accounts detect slyly after the quickly f}
+Primary Key: 49
+Data Content: Supplier { S_SUPPKEY=49, S_NAME=Supplier#000000049, S_ADDRESS=Nvq 6macF4GtJvz, S_NATIONKEY=24, S_PHONE=34-211-567-6800, S_ACCTBAL=9915.24, S_COMMENT=the finally bold dependencies. dependencies after the fluffily final foxes boost fluffi}
+Primary Key: 48
+Data Content: Supplier { S_SUPPKEY=48, S_NAME=Supplier#000000048, S_ADDRESS=jg0U FNPMQDuyuKvTnLXXaLf3Wl6OtONA6mQlWJ, S_NATIONKEY=14, S_PHONE=24-722-551-9498, S_ACCTBAL=5630.62, S_COMMENT=xpress instructions affix. fluffily even requests boos}
+Primary Key: 47
+Data Content: Supplier { S_SUPPKEY=47, S_NAME=Supplier#000000047, S_ADDRESS=3XM1x.Pcxqw.HK4XNlgbnZMbLhBHLA, S_NATIONKEY=14, S_PHONE=24-810-354-4471, S_ACCTBAL=2958.09, S_COMMENT=sly ironic deposits sleep carefully along t}
+Primary Key: 46
+Data Content: Supplier { S_SUPPKEY=46, S_NAME=Supplier#000000046, S_ADDRESS=e0URUXfDOYMdKe16Z5h5StMRbzGmTs.D2cjap, S_NATIONKEY=24, S_PHONE=34-748-308-3215, S_ACCTBAL=3580.35, S_COMMENT=gular. regular ideas across th}
+Primary Key: 45
+Data Content: Supplier { S_SUPPKEY=45, S_NAME=Supplier#000000045, S_ADDRESS=LcKnsa8XGtIO0WYSB7hkOrH rnzRg1, S_NATIONKEY=9, S_PHONE=19-189-635-8862, S_ACCTBAL=2944.23, S_COMMENT=iously according to the ironic. silent accounts.}
+Primary Key: 44
+Data Content: Supplier { S_SUPPKEY=44, S_NAME=Supplier#000000044, S_ADDRESS=kERxlLDnlIZJdN66zAPHklyL, S_NATIONKEY=7, S_PHONE=17-713-930-5667, S_ACCTBAL=9759.38, S_COMMENT=x. carefully quiet account}
+Primary Key: 43
+Data Content: Supplier { S_SUPPKEY=43, S_NAME=Supplier#000000043, S_ADDRESS=Z5mLuAoTUEeKY5v22VnnA4D87Ao6jF2LvMYnlX8h, S_NATIONKEY=12, S_PHONE=22-421-568-4862, S_ACCTBAL=7773.41, S_COMMENT=unts. unusual. final asymptotes }
+Primary Key: 42
+Data Content: Supplier { S_SUPPKEY=42, S_NAME=Supplier#000000042, S_ADDRESS=1Y5lwEgpe3j2vbUBYj3SwLhK62JlwEMtDC, S_NATIONKEY=22, S_PHONE=32-698-298-6317, S_ACCTBAL=6565.11, S_COMMENT= fluffily even requests cajole blithely fu}
+Primary Key: 41
+Data Content: Supplier { S_SUPPKEY=41, S_NAME=Supplier#000000041, S_ADDRESS=G 1FKHR435 wMKFmyt, S_NATIONKEY=18, S_PHONE=28-739-447-2525, S_ACCTBAL=6942.67, S_COMMENT=odolites boost across the furiously regular fo}
+Primary Key: 40
+Data Content: Supplier { S_SUPPKEY=40, S_NAME=Supplier#000000040, S_ADDRESS=zyIeWzbbpkTV37vm1nmSGBxSgd2Kp, S_NATIONKEY=22, S_PHONE=32-231-247-6991, S_ACCTBAL=-290.06, S_COMMENT= final patterns. accounts haggle idly pas}
+Primary Key: 39
+Data Content: Supplier { S_SUPPKEY=39, S_NAME=Supplier#000000039, S_ADDRESS=ZM. nSYpEPWr1yAFHaC91qjFcijjeU5eH, S_NATIONKEY=8, S_PHONE=18-851-856-5633, S_ACCTBAL=6115.65, S_COMMENT=le slyly requests. special packages shall are blithely. slyly unusual packages sleep }
+Primary Key: 38
+Data Content: Supplier { S_SUPPKEY=38, S_NAME=Supplier#000000038, S_ADDRESS=xEcx45vD0FXHT7c9mvWFY, S_NATIONKEY=4, S_PHONE=14-361-296-6426, S_ACCTBAL=2512.41, S_COMMENT=ins. fluffily special accounts haggle slyly af}
+Primary Key: 37
+Data Content: Supplier { S_SUPPKEY=37, S_NAME=Supplier#000000037, S_ADDRESS=cqjyB5h1nV, S_NATIONKEY=0, S_PHONE=10-470-144-1330, S_ACCTBAL=3017.47, S_COMMENT=iously final instructions. quickly special accounts hang fluffily above the accounts. deposits}
+Primary Key: 36
+Data Content: Supplier { S_SUPPKEY=36, S_NAME=Supplier#000000036, S_ADDRESS=mzSpBBJvbjdx3UKTW3bLFewRD78D91lAC879, S_NATIONKEY=13, S_PHONE=23-273-493-3679, S_ACCTBAL=2371.51, S_COMMENT=ular theodolites must haggle regular. bold accounts. slyly final pinto beans bo}
+Primary Key: 35
+Data Content: Supplier { S_SUPPKEY=35, S_NAME=Supplier#000000035, S_ADDRESS=QymmGXxjVVQ5OuABCXVVsu.4eF gU0Qc6, S_NATIONKEY=21, S_PHONE=31-720-790-5245, S_ACCTBAL=4381.41, S_COMMENT= ironic deposits! final. bold platelets haggle quickly quickly pendin}
+Primary Key: 34
+Data Content: Supplier { S_SUPPKEY=34, S_NAME=Supplier#000000034, S_ADDRESS=mYRe3KvA2O4lL4HhxDKkkrPUDPMKRCSp.Xpa, S_NATIONKEY=10, S_PHONE=20-519-982-2343, S_ACCTBAL=237.31, S_COMMENT=eposits. slyly final deposits toward the slyly regular dependencies sleep among the excu}
+Primary Key: 33
+Data Content: Supplier { S_SUPPKEY=33, S_NAME=Supplier#000000033, S_ADDRESS=gfeKpYw3400L0SDywXA6Ya1Qmq1w6YB9f3R, S_NATIONKEY=7, S_PHONE=17-138-897-9374, S_ACCTBAL=8564.12, S_COMMENT=n sauternes along the regular asymptotes are regularly along the }
+Primary Key: 32
+Data Content: Supplier { S_SUPPKEY=32, S_NAME=Supplier#000000032, S_ADDRESS=yvoD3TtZSx1skQNCK8agk5bZlZLug, S_NATIONKEY=23, S_PHONE=33-484-637-7873, S_ACCTBAL=3556.47, S_COMMENT=usly even depths. quickly ironic theodolites s}
+Primary Key: 31
+Data Content: Supplier { S_SUPPKEY=31, S_NAME=Supplier#000000031, S_ADDRESS=fRJimA7zchyApqRLHcQeocVpP, S_NATIONKEY=16, S_PHONE=26-515-530-4159, S_ACCTBAL=5916.91, S_COMMENT=into beans wake after the special packages. slyly fluffy requests cajole furio}
+Primary Key: 30
+Data Content: Supplier { S_SUPPKEY=30, S_NAME=Supplier#000000030, S_ADDRESS=84NmC1rmQfO0fj3zkobLT, S_NATIONKEY=16, S_PHONE=26-940-594-4852, S_ACCTBAL=8080.14, S_COMMENT=ias. carefully silent accounts cajole blithely. pending. special accounts cajole quickly above the f}
+Primary Key: 29
+Data Content: Supplier { S_SUPPKEY=29, S_NAME=Supplier#000000029, S_ADDRESS=658tEqXLPvRd6xpFdqC2, S_NATIONKEY=1, S_PHONE=11-555-705-5922, S_ACCTBAL=-811.62, S_COMMENT=y express ideas play furiously. even accounts sleep fluffily across the accounts. careful}
+Primary Key: 28
+Data Content: Supplier { S_SUPPKEY=28, S_NAME=Supplier#000000028, S_ADDRESS=GBhvoRh.7YIN V, S_NATIONKEY=0, S_PHONE=10-538-384-8460, S_ACCTBAL=-891.99, S_COMMENT=ld requests across the pinto beans are carefully against the quickly final courts. accounts sleep }
+Primary Key: 27
+Data Content: Supplier { S_SUPPKEY=27, S_NAME=Supplier#000000027, S_ADDRESS=lC4CjKwNHUr6L4xIpzOBK4NlHkFTg, S_NATIONKEY=18, S_PHONE=28-708-999-2028, S_ACCTBAL=1887.62, S_COMMENT=s according to the quickly regular hockey playe}
+Primary Key: 26
+Data Content: Supplier { S_SUPPKEY=26, S_NAME=Supplier#000000026, S_ADDRESS=iV.MHzAx6Z939uzFNkq09M0a1 MBfH7, S_NATIONKEY=21, S_PHONE=31-758-894-4436, S_ACCTBAL=21.18, S_COMMENT= ideas poach carefully after the blithely bold asymptotes. furiously pending theodoli}
+Primary Key: 25
+Data Content: Supplier { S_SUPPKEY=25, S_NAME=Supplier#000000025, S_ADDRESS=RCQKONXMFnrodzz6w7fObFVV6CUm2q, S_NATIONKEY=22, S_PHONE=32-431-945-3541, S_ACCTBAL=9198.31, S_COMMENT=ely regular deposits. carefully regular sauternes engage furiously above the regular accounts. idly }
+Primary Key: 24
+Data Content: Supplier { S_SUPPKEY=24, S_NAME=Supplier#000000024, S_ADDRESS=C4nPvLrVmKPPabFCj, S_NATIONKEY=0, S_PHONE=10-620-939-2254, S_ACCTBAL=9170.71, S_COMMENT=usly pending deposits. slyly final accounts run }
+Primary Key: 23
+Data Content: Supplier { S_SUPPKEY=23, S_NAME=Supplier#000000023, S_ADDRESS=ssetugTcXc096qlD7 2TL5crEEeS3zk, S_NATIONKEY=9, S_PHONE=19-559-422-5776, S_ACCTBAL=5926.41, S_COMMENT=ges could have to are ironic deposits. regular. even request}
+Primary Key: 22
+Data Content: Supplier { S_SUPPKEY=22, S_NAME=Supplier#000000022, S_ADDRESS=okiiQFk 8lm6EVX6Q0.bEcO, S_NATIONKEY=4, S_PHONE=14-144-830-2814, S_ACCTBAL=-966.2, S_COMMENT= ironically among the deposits. closely expre}
+Primary Key: 21
+Data Content: Supplier { S_SUPPKEY=21, S_NAME=Supplier#000000021, S_ADDRESS=81CavellcrJ0PQ3CPBID0Z0JwyJm0ka5igEs, S_NATIONKEY=2, S_PHONE=12-253-590-5816, S_ACCTBAL=9365.8, S_COMMENT=d. instructions integrate sometimes slyly pending instructions. accounts nag among the }
+Primary Key: 20
+Data Content: Supplier { S_SUPPKEY=20, S_NAME=Supplier#000000020, S_ADDRESS=iybAE.RmTymrZVYaFZva2SH.j, S_NATIONKEY=3, S_PHONE=13-715-945-6730, S_ACCTBAL=530.82, S_COMMENT=n. ironic ideas would nag blithely about the slyly regular accounts. silent. expr}
+Primary Key: 19
+Data Content: Supplier { S_SUPPKEY=19, S_NAME=Supplier#000000019, S_ADDRESS=edZT3es.nBFD8lBXTGeTl, S_NATIONKEY=24, S_PHONE=34-278-310-2731, S_ACCTBAL=6150.38, S_COMMENT=refully final foxes across the dogged theodolites sleep slyly abou}
+Primary Key: 18
+Data Content: Supplier { S_SUPPKEY=18, S_NAME=Supplier#000000018, S_ADDRESS=PGGVE5PWAMwKDZw , S_NATIONKEY=16, S_PHONE=26-729-551-1115, S_ACCTBAL=7040.82, S_COMMENT=accounts snooze slyly furiously bold }
+Primary Key: 17
+Data Content: Supplier { S_SUPPKEY=17, S_NAME=Supplier#000000017, S_ADDRESS=c2d.ESHRSkK3WYnxpgw6aOqN0q, S_NATIONKEY=19, S_PHONE=29-601-884-9219, S_ACCTBAL=1687.81, S_COMMENT=eep against the furiously bold ideas. fluffily bold packa}
+Primary Key: 16
+Data Content: Supplier { S_SUPPKEY=16, S_NAME=Supplier#000000016, S_ADDRESS=YjP5C55zHDXL7LalK27zfQnwejdpin4AMpvh, S_NATIONKEY=22, S_PHONE=32-822-502-4215, S_ACCTBAL=2972.26, S_COMMENT=ously express ideas haggle quickly dugouts? fu}
+Primary Key: 15
+Data Content: Supplier { S_SUPPKEY=15, S_NAME=Supplier#000000015, S_ADDRESS=olXVbNBfVzRqgokr1T.Ie, S_NATIONKEY=8, S_PHONE=18-453-357-6394, S_ACCTBAL=308.56, S_COMMENT= across the furiously regular platelets wake even deposits. quickly express she}
+Primary Key: 14
+Data Content: Supplier { S_SUPPKEY=14, S_NAME=Supplier#000000014, S_ADDRESS=EXsnO5pTNj4iZRm, S_NATIONKEY=15, S_PHONE=25-656-247-5058, S_ACCTBAL=9189.82, S_COMMENT=l accounts boost. fluffily bold warhorses wake}
+Primary Key: 13
+Data Content: Supplier { S_SUPPKEY=13, S_NAME=Supplier#000000013, S_ADDRESS=HK71HQyWoqRWOX8GI FpgAifW.2PoH, S_NATIONKEY=3, S_PHONE=13-727-620-7813, S_ACCTBAL=9107.22, S_COMMENT=requests engage regularly instructions. furiously special requests ar}
+Primary Key: 12
+Data Content: Supplier { S_SUPPKEY=12, S_NAME=Supplier#000000012, S_ADDRESS=aLIW  q0HYd, S_NATIONKEY=8, S_PHONE=18-179-925-7181, S_ACCTBAL=1432.69, S_COMMENT=al packages nag alongside of the bold instructions. express. daring accounts}
+Primary Key: 11
+Data Content: Supplier { S_SUPPKEY=11, S_NAME=Supplier#000000011, S_ADDRESS=JfwTs.LZrV. M.9C, S_NATIONKEY=18, S_PHONE=28-613-996-1505, S_ACCTBAL=3393.08, S_COMMENT=y ironic packages. slyly ironic accounts affix furiously; ironically unusual excuses across the flu}
+Primary Key: 10
+Data Content: Supplier { S_SUPPKEY=10, S_NAME=Supplier#000000010, S_ADDRESS=Saygah3gYWMp72i PY, S_NATIONKEY=24, S_PHONE=34-852-489-8585, S_ACCTBAL=3891.91, S_COMMENT=ing waters. regular requests ar}
+Primary Key: 9
+Data Content: Supplier { S_SUPPKEY=9, S_NAME=Supplier#000000009, S_ADDRESS=1KhUgZegwM3ua7dsYmekYBsK, S_NATIONKEY=10, S_PHONE=20-403-398-8662, S_ACCTBAL=5302.37, S_COMMENT=s. unusual. even requests along the furiously regular pac}
+Primary Key: 8
+Data Content: Supplier { S_SUPPKEY=8, S_NAME=Supplier#000000008, S_ADDRESS=9Sq4bBH2FQEmaFOocY45sRTxo6yuoG, S_NATIONKEY=17, S_PHONE=27-498-742-3860, S_ACCTBAL=7627.85, S_COMMENT=al pinto beans. asymptotes haggl}
+Primary Key: 7
+Data Content: Supplier { S_SUPPKEY=7, S_NAME=Supplier#000000007, S_ADDRESS=s.4TicNGB4uO6PaSqNBUq, S_NATIONKEY=23, S_PHONE=33-990-965-2201, S_ACCTBAL=6820.35, S_COMMENT=s unwind silently furiously regular courts. final requests are deposits. requests wake quietly blit}
+Primary Key: 6
+Data Content: Supplier { S_SUPPKEY=6, S_NAME=Supplier#000000006, S_ADDRESS=tQxuVm7s7CnK, S_NATIONKEY=14, S_PHONE=24-696-997-4969, S_ACCTBAL=1365.79, S_COMMENT=final accounts. regular dolphins use against the furiously ironic decoys. }
+Primary Key: 5
+Data Content: Supplier { S_SUPPKEY=5, S_NAME=Supplier#000000005, S_ADDRESS=Gcdm2rJRzl5qlTVzc, S_NATIONKEY=11, S_PHONE=21-151-690-3663, S_ACCTBAL=-283.84, S_COMMENT=. slyly regular pinto bea}
+Primary Key: 4
+Data Content: Supplier { S_SUPPKEY=4, S_NAME=Supplier#000000004, S_ADDRESS=Bk7ah4CK8SYQTepEmvMkkgMwg, S_NATIONKEY=15, S_PHONE=25-843-787-7479, S_ACCTBAL=4641.08, S_COMMENT=riously even requests above the exp}
+Primary Key: 3
+Data Content: Supplier { S_SUPPKEY=3, S_NAME=Supplier#000000003, S_ADDRESS=q1.G3Pj6OjIuUYfUoH18BFTKP5aU9bEV3, S_NATIONKEY=1, S_PHONE=11-383-516-1199, S_ACCTBAL=4192.4, S_COMMENT=blithely silent requests after the express dependencies are sl}
+Primary Key: 2
+Data Content: Supplier { S_SUPPKEY=2, S_NAME=Supplier#000000002, S_ADDRESS=89eJ5ksX3ImxJQBvxObC., S_NATIONKEY=5, S_PHONE=15-679-861-2259, S_ACCTBAL=4032.68, S_COMMENT= slyly bold instructions. idle dependen}
+Primary Key: 1
+Data Content: Supplier { S_SUPPKEY=1, S_NAME=Supplier#000000001, S_ADDRESS= N kD4on9OM Ipw3.gf0JBoQDd7tgrzrddZ, S_NATIONKEY=17, S_PHONE=27-918-335-1736, S_ACCTBAL=5755.94, S_COMMENT=each slyly above the careful}

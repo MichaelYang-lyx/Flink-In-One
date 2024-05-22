@@ -7,9 +7,13 @@ import org.apache.flink.api.java.tuple.Tuple4;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +24,7 @@ import tpc_query.DataStream.DataContent.IDataContent;
 import tpc_query.Query.IQuery;
 import tpc_query.Query.Q7;
 import tpc_query.Update.Insert;
+import java.io.File;
 
 public class MySQLSink extends RichSinkFunction<DataOperation> {
     private Connection connection;
@@ -47,17 +52,73 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
 
     }
 
+    String queryq7 = "SELECT " +
+            "n1.n_name AS supp_nation, " +
+            "n2.n_name AS cust_nation, " +
+            "EXTRACT(YEAR FROM l_shipdate) AS l_year, " +
+            "l_extendedprice * (1 - l_discount) AS volume " +
+            "FROM supplier, lineitem, orders, customer, nation n1, nation n2 " +
+            "WHERE s_suppkey = l_suppkey " +
+            "AND o_orderkey = l_orderkey " +
+            "AND c_custkey = o_custkey " +
+            "AND s_nationkey = n1.n_nationkey " +
+            "AND c_nationkey = n2.n_nationkey " +
+            "AND ( (n1.n_name = 'FRANCE' AND n2.n_name = 'GERMANY') " +
+            "OR (n1.n_name = 'GERMANY' AND n2.n_name = 'FRANCE') ) " +
+            "AND l_shipdate BETWEEN DATE '1995-01-01' AND DATE '1996-12-31'";
+
+    String query_lineitem = "SELECT * FROM lineitem";
+    String query_nation = "SELECT * FROM nation";
+    String test_query = "SELECT " +
+            "n1.n_name AS supp_nation, " +
+            "n2.n_name AS cust_nation, " +
+            "EXTRACT(YEAR FROM l_shipdate) AS l_year, " +
+            "l_extendedprice * (1 - l_discount) AS volume " +
+            "FROM supplier, lineitem, orders, customer, nation n1, nation n2 " +
+            "WHERE s_suppkey = l_suppkey " +
+            "AND o_orderkey = l_orderkey " +
+            "AND c_custkey = o_custkey " +
+            "AND s_nationkey = n1.n_nationkey " +
+            "AND c_nationkey = n2.n_nationkey ";
+
     @Override
     public void close() throws Exception {
 
-        for (Map.Entry<String, ITable> entry : tables.entrySet()) {
-            MySQLTable table = (MySQLTable) entry.getValue();
-            System.out.println("-------- Table Name: " + entry.getKey() + "---------------");
-            for (Map.Entry<Long, IDataContent> tupleEntry : table.allTuples.entrySet()) {
-                System.out.println("Primary Key: " + tupleEntry.getKey());
-                System.out.println("Data Content: " + tupleEntry.getValue());
+        try {
+            for (Map.Entry<String, ITable> entry : tables.entrySet()) {
+                MySQLTable table = (MySQLTable) entry.getValue();
+                PrintWriter writer = new PrintWriter(new File("output/tpc_query" + entry.getKey() + ".txt"));
+                writer.println("-------- Table Name: " + entry.getKey() + "---------");
+                for (Map.Entry<Long, IDataContent> tupleEntry : table.allTuples.entrySet()) {
+                    writer.println("Primary Key: " + tupleEntry.getKey());
+                    writer.println("Data Content: " + tupleEntry.getValue());
+                }
+                writer.close();
             }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+
+        Statement statement = connection.createStatement();
+
+        // System.out.println("==-------- Mysql Query Result Lineitem ---------==");
+        // ResultSet resultSet = statement.executeQuery(query_lineitem);
+        // ResultSetPrinter.printResultSet(resultSet);
+
+        System.out.println("==-------- Mysql Query Result Nation ---------==");
+        ResultSet resultSet2 = statement.executeQuery(query_nation);
+        ResultSetPrinter.printResultSet(resultSet2);
+
+        System.out.println("==-------- Mysql Query Result Q7 Part ---------==");
+        ResultSet resultSet3 = statement.executeQuery(test_query);
+        ResultSetPrinter.printResultSet(resultSet3);
+
+        System.out.println("==-------- Mysql Query Result Q7 whole ---------==");
+        ResultSet resultSet4 = statement.executeQuery(queryq7);
+        ResultSetPrinter.printResultSet(resultSet4);
+
+        System.out.println("==-------- Q7.directSelect1 ---------==");
+        System.out.println(Q7.directSelect1(tables));
 
         super.close();
         if (preparedStatement != null) {
@@ -107,7 +168,7 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
             }
             // 这里维护relation
 
-            System.out.println(preparedStatement);
+            // System.out.println(preparedStatement);
 
         } catch (Exception e) {
             System.err.println("Error while writing to database: " + e.getMessage());

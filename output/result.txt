@@ -1,4 +1,0 @@
-(flink,1)
-(hello,3)
-(java,1)
-(world,1)

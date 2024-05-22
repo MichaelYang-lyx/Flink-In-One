@@ -25,6 +25,7 @@ import tpc_query.Database.Table;
 import tpc_query.Database.TableController;
 import tpc_query.Query.IQuery;
 import tpc_query.Query.Q5;
+import tpc_query.Query.Q7;
 
 import org.apache.flink.api.common.state.MapState;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -128,7 +129,7 @@ public class Insert extends Update {
         }
         thisTable.indexLiveTuple.put(thisPrimaryKey, dataContent);
         if (thisTable.isRoot && (thisTable.sCounter.get(thisPrimaryKey) == thisTable.numChild)) {
-            Tuple4<String, String, Integer, Double> result = selectResult(tables, thisPrimaryKey);
+            Tuple4<String, String, Integer, Double> result = Q7.selectResult(tables, thisPrimaryKey);
             joinResultState.put(thisPrimaryKey, result);
             System.out.println("!!!!!!!!!!!!Select Result!!!!!!!!!!");
             System.out.println(result);
@@ -166,42 +167,6 @@ public class Insert extends Update {
                 }
             }
         }
-    }
-
-    public Tuple4<String, String, Integer, Double> selectResult(Map<String, ITable> tables,
-            Long lineitemPKey) throws Exception {
-        // Get Table
-        MySQLTable lineItem_Table = (MySQLTable) tables.get("LINEITEM");
-        MySQLTable supplier_Table = (MySQLTable) tables.get("SUPPLIER");
-        MySQLTable customer_Table = (MySQLTable) tables.get("CUSTOMER");
-        MySQLTable order_Table = (MySQLTable) tables.get("ORDER");
-        MySQLTable nation1_Table = (MySQLTable) tables.get("NATION1");
-        MySQLTable nation2_Table = (MySQLTable) tables.get("NATION2");
-        // Get Data
-        LineItem lineItem = (LineItem) lineItem_Table.indexLiveTuple.get(lineitemPKey);
-        Long l_orderkey = lineItem.L_ORDERKEY;
-        Long l_suppkey = lineItem.L_SUPPKEY;
-        Double l_extendedPrice = lineItem.L_EXTENDEDPRICE;
-        Double l_discount = lineItem.L_DISCOUNT;
-        Double volumn = l_extendedPrice * (1 - l_discount);
-        Date l_shipdate = lineItem.L_SHIPDATE;
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(l_shipdate);
-
-        int l_shipYear = calendar.get(Calendar.YEAR);
-        Supplier supplier = (Supplier) supplier_Table.indexLiveTuple.get(l_suppkey);
-        Long s_nationkey = supplier.S_NATIONKEY;
-        Nation nation1 = (Nation) nation1_Table.indexLiveTuple.get(s_nationkey);
-        String n_name1 = nation1.N_NAME;
-
-        Orders order = (Orders) order_Table.indexLiveTuple.get(l_orderkey);
-        long o_custkey = order.O_CUSTKEY;
-        Customer customer = (Customer) customer_Table.indexLiveTuple.get(o_custkey);
-        Long c_nationkey = customer.C_NATIONKEY;
-        Nation nation2 = (Nation) nation2_Table.indexLiveTuple.get(c_nationkey);
-        String n_name2 = nation2.N_NAME;
-
-        return Tuple4.of(n_name1, n_name2, l_shipYear, volumn);
     }
 
     public void insertUpdate(Table table, DataOperation dataOperation) {

@@ -35,12 +35,11 @@ public class Insert extends Update {
         System.out.println("uuid: " + uuid);
         System.out.println("longUuid: " + longUuid);
         System.out.println("strUuid: " + strUuid);
-        Insert insert_instance = new Insert();
-        insert_instance.insert(null, null, null, null);
+        // insert_instance.insert(null, null, null, null);
 
     }
 
-    public void insert(Map<String, ITable> tables, String tableName, IDataContent dataContent,
+    public static void insert(Map<String, ITable> tables, String tableName, IDataContent dataContent,
             MapState<Long, Tuple4<String, String, Integer, Double>> joinResultState) throws Exception {
 
         MySQLTable thisTable = (MySQLTable) tables.get(tableName);
@@ -100,24 +99,22 @@ public class Insert extends Update {
         }
     };
 
-    public void insertUpdate(Map<String, ITable> tables, String tableName, IDataContent dataContent,
+    public static void insertUpdate(Map<String, ITable> tables, String tableName, IDataContent dataContent,
             MapState<Long, Tuple4<String, String, Integer, Double>> joinResultState) throws Exception {
 
         MySQLTable thisTable = (MySQLTable) tables.get(tableName);
         Long thisPrimaryKey = dataContent.primaryKeyLong();
-        if (tableName.equals("LINEITEM")) {
-            System.out.println("@@@@@@@@@");
-        }
+
         thisTable.indexLiveTuple.put(thisPrimaryKey, dataContent);
         if (thisTable.isRoot && (thisTable.sCounter.get(thisPrimaryKey) == thisTable.numChild)) {
             Tuple4<String, String, Integer, Double> result = Q7.selectResult(tables, thisPrimaryKey);
+            System.out.println(thisPrimaryKey + " ******** " + result);
             joinResultState.put(thisPrimaryKey, result);
-            System.out.println("!!!!!!!!!!!!Select Result!!!!!!!!!!");
-            System.out.println(result);
+            // System.out.println("!!!!!!!!!!!!Select Result!!!!!!!!!!");
+            // System.out.println(result);
 
         } else {
-            System.out.println("=============== Parents =================");
-            System.out.println(thisTable);
+
             for (String parentName : thisTable.parents) {
                 MySQLTable parentTable = (MySQLTable) tables.get(parentName);
                 HashMap<Long, ArrayList<Long>> parentRelation = parentTable.indexTableAndTableChildInfo.get(tableName);

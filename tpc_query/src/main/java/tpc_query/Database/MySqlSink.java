@@ -23,6 +23,7 @@ import tpc_query.DataStream.DataOperation;
 import tpc_query.DataStream.DataContent.IDataContent;
 import tpc_query.Query.IQuery;
 import tpc_query.Query.Q7;
+import tpc_query.Update.Delete;
 import tpc_query.Update.Insert;
 import java.io.File;
 
@@ -120,6 +121,14 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
         System.out.println("==-------- Q7.directSelect1 ---------==");
         System.out.println(Q7.directSelect1(tables));
 
+        System.out.println("==-------- joinResult) ---------==");
+        Iterable<Map.Entry<Long, Tuple4<String, String, Integer, Double>>> entries = joinResultState.entries();
+        for (Map.Entry<Long, Tuple4<String, String, Integer, Double>> entry : entries) {
+            Long key = entry.getKey();
+            Tuple4<String, String, Integer, Double> value = entry.getValue();
+            System.out.println("Key: " + key + ", Value: " + value);
+        }
+
         super.close();
         if (preparedStatement != null) {
             preparedStatement.close();
@@ -146,7 +155,6 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
     @Override
     public void invoke(DataOperation dataOperation, Context context) throws Exception {
         // below for test
-
         try {
             String sql = generateSql(dataOperation);
             preparedStatement = connection.prepareStatement(sql);
@@ -156,26 +164,38 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
                 }
             }
 
-            System.out.println("** " + dataOperation.operation + "   " + preparedStatement);
+            // System.out.println("** " + dataOperation.operation + " " +
+            // preparedStatement);
             preparedStatement.executeUpdate();
-            // 这里还需要添加维护relationship的操作
-            if (dataOperation.operation.equals("+")) {
+        } catch (Exception e) {
 
-                Insert insert = new Insert();
-                if (dataOperation.tableName.equals("NATION")) {
-                    dataOperation.switchTableName("NATION1");
-                    insert.insert(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
-                    dataOperation.switchTableName("NATION2");
-                    insert.insert(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
-                    dataOperation.switchTableName("NATION");
+            System.err.println("Error while writing to database: " + e.getMessage());
+        }
+        // 这里还需要添加维护relationship的操作
+        if (dataOperation.operation.equals("+")) {
 
-                } else {
-                    insert.insert(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
-                }
+            if (dataOperation.tableName.equals("NATION")) {
+                dataOperation.switchTableName("NATION1");
+                Insert.insert(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
+                dataOperation.switchTableName("NATION2");
+                Insert.insert(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
+                dataOperation.switchTableName("NATION");
+
+            } else {
+                Insert.insert(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
+            }
+        } else {
+            if (dataOperation.tableName.equals("NATION")) {
+                dataOperation.switchTableName("NATION1");
+                Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
+                dataOperation.switchTableName("NATION2");
+                Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
+                dataOperation.switchTableName("NATION");
+
+            } else {
+                Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
             }
 
-        } catch (Exception e) {
-            System.err.println("Error while writing to database: " + e.getMessage());
         }
 
     }

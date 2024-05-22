@@ -121,7 +121,7 @@ public class Q7 implements IQuery, Serializable {
         MySQLTable lineItem_Table = (MySQLTable) tables.get("LINEITEM");
         MySQLTable supplier_Table = (MySQLTable) tables.get("SUPPLIER");
         MySQLTable customer_Table = (MySQLTable) tables.get("CUSTOMER");
-        MySQLTable order_Table = (MySQLTable) tables.get("ORDER");
+        MySQLTable orders_Table = (MySQLTable) tables.get("ORDERS");
         MySQLTable nation1_Table = (MySQLTable) tables.get("NATION1");
         MySQLTable nation2_Table = (MySQLTable) tables.get("NATION2");
         // Get Data
@@ -140,8 +140,7 @@ public class Q7 implements IQuery, Serializable {
         Long s_nationkey = supplier.S_NATIONKEY;
         Nation nation1 = (Nation) nation1_Table.indexLiveTuple.get(s_nationkey);
         String n_name1 = nation1.N_NAME;
-
-        Orders order = (Orders) order_Table.indexLiveTuple.get(l_orderkey);
+        Orders order = (Orders) orders_Table.indexLiveTuple.get(l_orderkey);
         long o_custkey = order.O_CUSTKEY;
         Customer customer = (Customer) customer_Table.indexLiveTuple.get(o_custkey);
         Long c_nationkey = customer.C_NATIONKEY;

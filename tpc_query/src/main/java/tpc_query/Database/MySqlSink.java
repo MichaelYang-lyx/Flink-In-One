@@ -31,11 +31,6 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
     private Connection connection;
     private PreparedStatement preparedStatement;
 
-    private MapState<Long, Tuple4<String, String, Integer, Double>> joinResultState;
-    public TableController tableController;
-
-    public Map<String, ITable> tables;
-
     @Override
     public void open(Configuration parameters) throws Exception {
         System.out.println("@@@@@@MySQLSink open@@@@@@");
@@ -43,14 +38,6 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(MySQLConnector.MYSQL_URL, MySQLConnector.MYSQL_USER,
                 MySQLConnector.MYSQL_PASSWORD);
-        joinResultState = getRuntimeContext().getMapState(
-                new MapStateDescriptor<>("ResultState", Types.LONG,
-                        Types.TUPLE(Types.STRING, Types.STRING, Types.DOUBLE, Types.DOUBLE)));
-
-        tableController = new TableController("MySQL");
-        IQuery query = new Q7();
-        tableController.setupTables(query);
-        tables = tableController.tables;
 
     }
 
@@ -69,66 +56,14 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
             "OR (n1.n_name = 'GERMANY' AND n2.n_name = 'FRANCE') ) " +
             "AND l_shipdate BETWEEN DATE '1995-01-01' AND DATE '1996-12-31'";
 
-    String query_lineitem = "SELECT * FROM lineitem";
-    String query_nation = "SELECT * FROM nation";
-    String test_query = "SELECT " +
-            "n1.n_name AS supp_nation, " +
-            "n2.n_name AS cust_nation, " +
-            "EXTRACT(YEAR FROM l_shipdate) AS l_year, " +
-            "l_extendedprice * (1 - l_discount) AS volume " +
-            "FROM supplier, lineitem, orders, customer, nation n1, nation n2 " +
-            "WHERE s_suppkey = l_suppkey " +
-            "AND o_orderkey = l_orderkey " +
-            "AND c_custkey = o_custkey " +
-            "AND s_nationkey = n1.n_nationkey " +
-            "AND c_nationkey = n2.n_nationkey ";
-
     @Override
     public void close() throws Exception {
 
-        try {
-            for (Map.Entry<String, ITable> entry : tables.entrySet()) {
-                MyTable table = (MyTable) entry.getValue();
-                PrintWriter writer = new PrintWriter(new File("output/tpc_query/" + entry.getKey() + ".txt"));
-                writer.println("-------- Table Name: " + entry.getKey() + "---------");
-                for (Map.Entry<Long, IDataContent> tupleEntry : table.allTuples.entrySet()) {
-                    writer.println("Primary Key: " + tupleEntry.getKey());
-                    writer.println("Data Content: " + tupleEntry.getValue());
-                }
-                writer.close();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
         Statement statement = connection.createStatement();
 
-        // System.out.println("==-------- Mysql Query Result Lineitem ---------==");
-        // ResultSet resultSet = statement.executeQuery(query_lineitem);
-        // ResultSetPrinter.printResultSet(resultSet);
-
-        System.out.println("==-------- Mysql Query Result Nation ---------==");
-        ResultSet resultSet2 = statement.executeQuery(query_nation);
-        ResultSetPrinter.printResultSet(resultSet2);
-
-        System.out.println("==-------- Mysql Query Result Q7 Part ---------==");
-        ResultSet resultSet3 = statement.executeQuery(test_query);
-        ResultSetPrinter.printResultSet(resultSet3);
-
         System.out.println("==-------- Mysql Query Result Q7 whole ---------==");
-        ResultSet resultSet4 = statement.executeQuery(queryq7);
+        ResultSet resultSet4 = statement.executeQuery(Q7.SQLQuery);
         ResultSetPrinter.printResultSet(resultSet4);
-
-        System.out.println("==-------- Q7.directSelect1 ---------==");
-        System.out.println(Q7.directSelect1(tables));
-
-        System.out.println("==-------- joinResult) ---------==");
-        Iterable<Map.Entry<Long, Tuple4<String, String, Integer, Double>>> entries = joinResultState.entries();
-        for (Map.Entry<Long, Tuple4<String, String, Integer, Double>> entry : entries) {
-            Long key = entry.getKey();
-            Tuple4<String, String, Integer, Double> value = entry.getValue();
-            System.out.println("Key: " + key + ", Value: " + value);
-        }
 
         super.close();
         if (preparedStatement != null) {
@@ -171,35 +106,5 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
 
             System.err.println("Error while writing to database: " + e.getMessage());
         }
-
-        if (dataOperation.operation.equals("+")) {
-
-            if (dataOperation.tableName.equals("NATION")) {
-                dataOperation.switchTableName("NATION1");
-                Insert.insert(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
-                dataOperation.switchTableName("NATION2");
-                Insert.insert(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
-                dataOperation.switchTableName("NATION");
-
-            } else {
-                Insert.insert(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
-            }
-        } else {
-            if (dataOperation.tableName.equals("NATION")) {
-                dataOperation.switchTableName("NATION1");
-                Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent,
-                        joinResultState);
-                dataOperation.switchTableName("NATION2");
-                Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent,
-                        joinResultState);
-                dataOperation.switchTableName("NATION");
-
-            } else {
-                Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent,
-                        joinResultState);
-            }
-
-        }
-
     }
 }

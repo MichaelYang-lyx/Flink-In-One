@@ -107,9 +107,26 @@ public class Insert extends Update {
 
         thisTable.indexLiveTuple.put(thisPrimaryKey, dataContent);
         if (thisTable.isRoot && (thisTable.sCounter.get(thisPrimaryKey) == thisTable.numChild)) {
-            Tuple4<String, String, Integer, Double> result = Q7.selectResult(tables, thisPrimaryKey);
-            System.out.println(thisPrimaryKey + " ******** " + result);
-            joinResultState.put(thisPrimaryKey, result);
+            Tuple4<String, String, Integer, Double> result = Q7.selectResult(tables, thisPrimaryKey);// return null if
+            if (result != null) {
+                joinResultState.put(thisPrimaryKey, result);
+            } // cannot pass the
+            // filter
+            // System.out.println(thisPrimaryKey + " ******** " + result);
+
+            // ;
+            // }
+
+            // System.out.println("==-------- joinResult) ---------==");
+            // int count = 0;
+            // Iterable<Map.Entry<Long, Tuple4<String, String, Integer, Double>>> entries =
+            // joinResultState.entries();
+            // for (Map.Entry<Long, Tuple4<String, String, Integer, Double>> entry :
+            // entries) {
+            // count += 1;
+
+            // }
+            // System.out.println(tableName + " join result count: " + count);
             // System.out.println("!!!!!!!!!!!!Select Result!!!!!!!!!!");
             // System.out.println(result);
 

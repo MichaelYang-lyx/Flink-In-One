@@ -38,6 +38,7 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
 
     @Override
     public void open(Configuration parameters) throws Exception {
+        System.out.println("@@@@@@MySQLSink open@@@@@@");
         super.open(parameters);
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(MySQLConnector.MYSQL_URL, MySQLConnector.MYSQL_USER,
@@ -155,6 +156,7 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
     @Override
     public void invoke(DataOperation dataOperation, Context context) throws Exception {
         // below for test
+
         try {
             String sql = generateSql(dataOperation);
             preparedStatement = connection.prepareStatement(sql);
@@ -184,19 +186,23 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
             } else {
                 Insert.insert(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
             }
-        } else {
-            if (dataOperation.tableName.equals("NATION")) {
-                dataOperation.switchTableName("NATION1");
-                Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
-                dataOperation.switchTableName("NATION2");
-                Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
-                dataOperation.switchTableName("NATION");
-
-            } else {
-                Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent, joinResultState);
-            }
-
         }
+        // else {
+        // if (dataOperation.tableName.equals("NATION")) {
+        // dataOperation.switchTableName("NATION1");
+        // Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent,
+        // joinResultState);
+        // dataOperation.switchTableName("NATION2");
+        // Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent,
+        // joinResultState);
+        // dataOperation.switchTableName("NATION");
+
+        // } else {
+        // Delete.delete(tables, dataOperation.tableName, dataOperation.dataContent,
+        // joinResultState);
+        // }
+
+        // }
 
     }
 }

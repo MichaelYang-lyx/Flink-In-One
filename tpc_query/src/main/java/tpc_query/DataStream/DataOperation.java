@@ -12,7 +12,7 @@ public class DataOperation {
     public IDataContent dataContent;
 
     public String getKey() {
-        return tableName;
+        return "1";
     }
 
     public DataOperation(String operation, String tableName) {

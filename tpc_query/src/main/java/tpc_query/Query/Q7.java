@@ -146,8 +146,11 @@ public class Q7 implements IQuery, Serializable {
         Long c_nationkey = customer.C_NATIONKEY;
         Nation nation2 = (Nation) nation2_Table.indexLiveTuple.get(c_nationkey);
         String n_name2 = nation2.N_NAME;
-
-        return Tuple4.of(n_name1, n_name2, l_shipYear, volumn);
+        if (n_name1.equals(n_name2)) {
+            return null;
+        } else {
+            return Tuple4.of(n_name1, n_name2, l_shipYear, volumn);
+        }
     }
 
 }

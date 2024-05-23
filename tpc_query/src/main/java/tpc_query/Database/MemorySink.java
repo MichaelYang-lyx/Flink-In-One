@@ -3,6 +3,7 @@ package tpc_query.Database;
 import org.apache.flink.api.common.state.MapState;
 import org.apache.flink.api.common.state.MapStateDescriptor;
 import org.apache.flink.api.common.typeinfo.Types;
+import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.api.java.tuple.Tuple4;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
@@ -29,7 +30,8 @@ import java.io.File;
 
 public class MemorySink extends RichSinkFunction<DataOperation> {
 
-    private MapState<Long, Tuple4<String, String, Integer, Double>> joinResultState;
+    public MapState<Long, Tuple4<String, String, Integer, Double>> joinResultState;
+    public MapState<Tuple3<String, String, Integer>, Double> calculationState;
     public TableController tableController;
 
     public Map<String, ITable> tables;
@@ -43,16 +45,19 @@ public class MemorySink extends RichSinkFunction<DataOperation> {
                 new MapStateDescriptor<>("ResultState", Types.LONG,
                         Types.TUPLE(Types.STRING, Types.STRING, Types.DOUBLE, Types.DOUBLE)));
 
-        tableController = new TableController("MySQL");
+        calculationState = getRuntimeContext().getMapState(
+                new MapStateDescriptor<>("calculationState", Types.TUPLE(Types.STRING, Types.STRING, Types.INT),
+                        Types.DOUBLE));
+
+        tableController = new TableController("Memory");
+
         IQuery query = new Q7();
         tableController.setupTables(query);
         tables = tableController.tables;
 
     }
 
-    @Override
-    public void close() throws Exception {
-
+    private void writeToFile() {
         try {
             for (Map.Entry<String, ITable> entry : tables.entrySet()) {
                 MyTable table = (MyTable) entry.getValue();
@@ -67,6 +72,11 @@ public class MemorySink extends RichSinkFunction<DataOperation> {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void close() throws Exception {
+        this.writeToFile();
 
         System.out.println("==-------- Q7.directSelect1 ---------==");
         System.out.println(Q7.directSelect1(tables));
@@ -76,6 +86,28 @@ public class MemorySink extends RichSinkFunction<DataOperation> {
         for (Map.Entry<Long, Tuple4<String, String, Integer, Double>> entry : entries) {
             Long key = entry.getKey();
             Tuple4<String, String, Integer, Double> value = entry.getValue();
+            System.out.println("Key: " + key + ", Value: " + value);
+        }
+
+        Iterable<Tuple4<String, String, Integer, Double>> joinState = joinResultState.values();
+        for (Tuple4<String, String, Integer, Double> joinResult : joinState) {
+            if (!joinResult.f0.equals(joinResult.f1)) {
+                Tuple3<String, String, Integer> keyBy = new Tuple3<>(joinResult.f0, joinResult.f1, joinResult.f2);
+                if (calculationState.get(keyBy) != null) {
+                    double curSum = calculationState.get(keyBy);
+                    calculationState.put(keyBy, curSum + joinResult.f3);
+                } else {
+                    calculationState.put(keyBy, joinResult.f3);
+                }
+
+            }
+        }
+
+        System.out.println("==-------- Final Result) ---------==");
+        Iterable<Map.Entry<Tuple3<String, String, Integer>, Double>> calculationEntries = calculationState.entries();
+        for (Map.Entry<Tuple3<String, String, Integer>, Double> entry : calculationEntries) {
+            Tuple3<String, String, Integer> key = entry.getKey();
+            Double value = entry.getValue();
             System.out.println("Key: " + key + ", Value: " + value);
         }
 

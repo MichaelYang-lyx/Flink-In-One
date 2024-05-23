@@ -28,12 +28,12 @@ public class TableController {
 
     public void setupTables(IQuery query) {
         query.registerTables(this.tableInfo);
-        if (this.type.equals("memory")) {
+        if (this.type.equals("Memory")) {
             this.tables = new HashMap<>();
             for (Map.Entry<String, Tuple5<Boolean, Boolean, List<String>, Integer, List<String>>> entry : tableInfo
                     .entrySet()) {
                 String tableName = entry.getKey();
-                ITable table = new MemoryTable(tableName, entry.getValue());
+                ITable table = new MyTable(tableName, entry.getValue()); // temp is the same thing
                 this.tables.put(tableName, table);
             }
         } else if (this.type.equals("MySQL")) {

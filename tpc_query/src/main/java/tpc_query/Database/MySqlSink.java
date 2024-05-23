@@ -33,7 +33,7 @@ public class MySQLSink extends RichSinkFunction<DataOperation> {
 
     @Override
     public void open(Configuration parameters) throws Exception {
-        System.out.println("@@@@@@MySQLSink open@@@@@@");
+        System.out.println("@@@@@@ MySQLSink open @@@@@@");
         super.open(parameters);
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(MySQLConnector.MYSQL_URL, MySQLConnector.MYSQL_USER,

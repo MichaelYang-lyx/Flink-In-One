@@ -29,7 +29,7 @@ public class Main {
         // System.out.print("Creating JDBC sink");
         MySQLConnector.clearTPCHData();
 
-        /* 选 MYSQL还是 Memory */
+        /* 选 MySQL还是 Memory */
         String choice = "Memory";
         if (choice.equals("MySQL")) {
             MySQLSink mySQLSink = new MySQLSink();

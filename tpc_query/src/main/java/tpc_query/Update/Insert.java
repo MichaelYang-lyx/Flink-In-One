@@ -50,7 +50,6 @@ public class Insert extends Update {
      */
     public static void insert(Map<String, ITable> tables, String tableName, IDataContent dataContent,
             MapState<Long, Tuple4<String, String, Integer, Double>> joinResultState) throws Exception {
-
         MyTable thisTable = (MyTable) tables.get(tableName);
         Long thisPrimaryKey = dataContent.primaryKeyLong();
         // Insert the new tuple into the table

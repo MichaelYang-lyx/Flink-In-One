@@ -6,7 +6,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-This repository contains the source code for the MSBD 5014IP project, as well as various materials I have collected during this semester.
+This repository contains the source code for the MSBD 5014IP project, as well as various materials I have collected during this semester when learning Flink.
 
 ## Table of Contents
 

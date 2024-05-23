@@ -104,8 +104,8 @@ public class MemorySink extends RichSinkFunction<DataOperation> {
         }
 
         System.out.println("==-------- Final Result) ---------==");
-        Iterable<Map.Entry<Tuple3<String, String, Integer>, Double>> calculationEntries = calculationState.entries();
-        for (Map.Entry<Tuple3<String, String, Integer>, Double> entry : calculationEntries) {
+        Iterable<Map.Entry<Tuple3<String, String, Integer>, Double>> finalResultEntries = calculationState.entries();
+        for (Map.Entry<Tuple3<String, String, Integer>, Double> entry : finalResultEntries) {
             Tuple3<String, String, Integer> key = entry.getKey();
             Double value = entry.getValue();
             System.out.println("Key: " + key + ", Value: " + value);

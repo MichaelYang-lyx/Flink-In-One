@@ -1,5 +1,0 @@
--------- Table Name: NATION2---------
-Primary Key: 7
-Data Content: Nation [N_NATIONKEY=7, N_NAME=GERMANY, N_REGIONKEY=3, N_COMMENT=l platelets. regular accounts x-ray: unusual. regular acco]
-Primary Key: 6
-Data Content: Nation [N_NATIONKEY=6, N_NAME=FRANCE, N_REGIONKEY=3, N_COMMENT=refully final requests. regular. ironi]

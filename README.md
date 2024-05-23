@@ -92,25 +92,25 @@ This section provides an overview of the four main algorithms implemented in thi
 
 This algorithm handles the insertion of new tuples into the database while maintaining the acyclic foreign-key join structure.
 
-<img src="pictures/Insert.png" align="center" width="600" height="600">
+<img src="pictures/Insert.png" align="center" width="400" height="400">
 
 ### Insert-Update Algorithm
 
 This algorithm deals with the insertion and updating of tuples simultaneously. It ensures that the database remains consistent and acyclic.
 
-<img src="pictures/InsertUpdate.png" align="center" width="600" height="650">
+<img src="pictures/InsertUpdate.png" align="center" width="400" height="430">
 
 ### Delete Algorithm
 
 This algorithm manages the deletion of tuples from the database, ensuring that the foreign-key constraints and the acyclic nature of the joins are preserved.
 
-<img src="pictures/Delete.png" align="center" width="600" height="300">
+<img src="pictures/Delete.png" align="center" width="400" height="150">
 
 ### Delete-Update Algorithm
 
 This algorithm handles the deletion and updating of tuples in tandem, maintaining the integrity and acyclic structure of the foreign-key joins.
 
-<img src="pictures/DeleteUpdate.png" align="center" width="600" height="450">
+<img src="pictures/DeleteUpdate.png" align="center" width="400" height="300">
 
 ## References
 

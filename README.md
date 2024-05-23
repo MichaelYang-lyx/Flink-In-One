@@ -1,4 +1,4 @@
-# MSBD 5014IP Project Repository
+# MSBD 5014 IP Project Repository
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -6,7 +6,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-This repository contains the source code for the MSBD 5014IP project, as well as various materials I have collected during this semester when learning Flink.
+This repository contains the source code for the [MSBD 5014 IP project](https://github.com/MichaelYang-lyx/Flink-In-One/tree/main/tpc_query), as well as various materials I have collected during this semester when learning Flink.
 
 ## Table of Contents
 

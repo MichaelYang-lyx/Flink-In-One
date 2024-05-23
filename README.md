@@ -114,8 +114,8 @@ This algorithm handles the deletion and updating of tuples in tandem, maintainin
 
 ## References
 
-1. [Maintaining Acyclic Foreign-Key Joins under Updates](https://wqc0712.github.io/): Qichen Wang and Ke Yi. ACM SIGMOD International Conference on Management of Data (SIGMOD), June 2020.
-2. [Environmental Influences on Infanticide in Columbian Ground Squirrels](https://link.springer.com/article/10.1007/s00265-007-0443-y): An exploration of the factors affecting infanticide among ground squirrels.
+1. [Maintaining Acyclic Foreign-Key Joins under Updates](https://dl.acm.org/doi/abs/10.1145/3318464.3380586?casa_token=_n_OZzDTmf0AAAAA:5_R9tqqkg_WAfK8GC3bXsdaySFkGz5AhM66EsKmnBSnxfsYula_7HMS1OkX_xtIpuUFqcsz3bFf88w)
+2. [Cquirrel: Continuous Query Processing over Acyclic Relational Schemas](https://dl.acm.org/doi/abs/10.14778/3476311.3476315?casa_token=Y71yAEOLUskAAAAA:wt667vhERGa90e4Q2QIAw53RXVH8f4BXDZtdcW1Z27MmSFRqJCwDkFjFn2P2rriDmanAlCPLsuz-Nw)
 3. [Flink](https://flink.apache.org/): Apache Flink is an open-source stream processing framework for distributed, high-performing, always-available, and accurate data streaming applications.
 
 Feel free to explore the repository and use the provided resources. If you have any questions or need further assistance, please contact me.

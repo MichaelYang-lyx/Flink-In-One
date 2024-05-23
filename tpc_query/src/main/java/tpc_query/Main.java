@@ -15,6 +15,12 @@ import tpc_query.Database.MySQLSink;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc();
+        long memoryBefore = runtime.totalMemory() - runtime.freeMemory();
+        System.out.println("Memory usage before execution: " + memoryBefore + " bytes");
+
         long startTime = System.currentTimeMillis();
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         IQuery query = new Q7();
@@ -45,6 +51,11 @@ public class Main {
         long endTime = System.currentTimeMillis();
         long executionTime = endTime - startTime;
         System.out.println("Query executed in " + executionTime / 1000.0 + " seconds.");
+
+        long memoryAfter = runtime.totalMemory() - runtime.freeMemory();
+        System.out.println("Memory usage after execution: " + memoryAfter + " bytes");
+        long memoryUsed = memoryAfter - memoryBefore;
+        System.out.println("Memory used by execution: " + memoryUsed + " bytes");
 
     }
 }

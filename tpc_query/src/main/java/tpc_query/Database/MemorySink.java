@@ -78,8 +78,8 @@ public class MemorySink extends RichSinkFunction<DataOperation> {
     public void close() throws Exception {
         this.writeToFile();
 
-        System.out.println("==-------- Q7.directSelect1 ---------==");
-        System.out.println(Q7.directSelect1(tables));
+        // System.out.println("==-------- Q7.directSelect1 ---------==");
+        // System.out.println(Q7.directSelect1(tables));
 
         System.out.println("==-------- joinResult) ---------==");
         Iterable<Map.Entry<Long, Tuple4<String, String, Integer, Double>>> entries = joinResultState.entries();

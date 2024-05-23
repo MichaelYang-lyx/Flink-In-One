@@ -14,6 +14,32 @@ import tpc_query.DataStream.DataContent.Region;
 
 public class Q5 implements IQuery, Serializable {
 
+    public static String SQLQuery5 = "SELECT " +
+            "n_name AS nation, " +
+            "EXTRACT(YEAR FROM l_shipdate) AS l_year, " +
+            "SUM(l_extendedprice * (1 - l_discount)) AS revenue " +
+            "FROM " +
+            "customer, " +
+            "orders, " +
+            "lineitem, " +
+            "supplier, " +
+            "nation, " +
+            "region " +
+            "WHERE " +
+            "c_custkey = o_custkey " +
+            "AND l_orderkey = o_orderkey " +
+            "AND l_suppkey = s_suppkey " +
+            "AND c_nationkey = n_nationkey " +
+            "AND n_regionkey = r_regionkey " +
+            "AND r_name = 'ASIA' " +
+            "AND l_shipdate BETWEEN DATE '1994-01-01' AND DATE '1996-12-31' " +
+            "GROUP BY " +
+            "n_name, " +
+            "EXTRACT(YEAR FROM l_shipdate) " +
+            "ORDER BY " +
+            "n_name, " +
+            "l_year";
+
     public boolean filter(DataOperation data) {
         if (data.getTableName().equals("region.tbl")) {
             Region region = (Region) data.getDataContent();

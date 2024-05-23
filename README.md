@@ -19,7 +19,7 @@ This repository contains the source code for the [MSBD 5014 IP project](https://
 
 ## Data Generation
 
-The dataset is generated using the DBGEN tool. You can refer to the detailed documentation [here](https://docs.deistercloud.com/content/Databases.30/TPCH%20Benchmark.90/Data%20generation%20tool.30.xml?embedded=true).
+The dataset is generated using the DBGEN tool, and you can find [that](https://github.com/MichaelYang-lyx/Flink-In-One/tree/main/DBGEN) in my root directory. You can refer to the detailed documentation [here](https://docs.deistercloud.com/content/Databases.30/TPCH%20Benchmark.90/Data%20generation%20tool.30.xml?embedded=true).
 
 You can also find a useful guide on GitHub: [TPCH DBGEN Guide](https://gist.github.com/yunpengn/6220ffc1b69cee5c861d93754e759d08).
 
